@@ -1,6 +1,6 @@
 {
   "diagnostic.checkCurrentLine": true,
-  // "coc.preferences.formatOnSaveFileTypes": ["css", "markdown", "ts"],
+  "coc.preferences.formatOnSaveFileTypes": ["css", "markdown", "ts"],
   "coc.preferences.extensionUpdateCheck": "daily",
   "coc.preferences.formatOnType": true,
   "diagnostic.checkCurrentLine": true,
@@ -11,7 +11,6 @@
   "diagnostic.infoSign": "•",
   "diagnostic.hintSign": "•",
 
-  // Prettier
   "prettier.arrowParens": "always",
   "prettier.bracketSpacing": true,
   "prettier.printWidth": 80,
@@ -19,12 +18,10 @@
   "prettier.tabWidth": 2,
   "prettier.trailingComma": "es5",
 
-  // Tailwind
   "tailwindCSS.enable": true,
   "tailwindCSS.validate": true,
   "tailwindCSS.emmetCompletions": true,
 
-  // Git
   "git.enableGutters": true,
   "git.addedSign.text": "┃",
   "git.changedSign.text": "┃",
