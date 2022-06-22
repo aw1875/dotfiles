@@ -1,0 +1,18 @@
+## Plugins
+
+- [vim-airline](https://github.com/vim-airline/vim-airline)
+- [vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)
+- [coc-tailwind-intellisense](https://github.com/rodrigore/coc-tailwind-intellisense)
+- [coc](https://github.com/neoclide/coc.nvim)
+- [es7-snippets](https://github.com/dsznajder/vscode-react-javascript-snippets)
+- [nvim-tree](https://github.com/kyazdani42/nvim-tree.lua)
+- [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)
+- [telescope](https://github.com/nvim-telescope/telescope.nvim)
+- [vim-commentary](https://github.com/tpope/vim-commentary)
+- [vim-heritage](https://github.com/jessarcher/vim-heritage)
+- [vim-lastplace](https://github.com/farmergreg/vim-lastplace)
+- [vim-one](https://github.com/rakr/vim-one)
+- [vim-polyglot](https://github.com/sheerun/vim-polyglot)
+- [vim-ripgrep](https://github.com/jremmen/vim-ripgrep)
+- [vim-visual-multi](https://github.com/mg979/vim-visual-multi)
+- [which-key](https://github.com/folke/which-key.nvim)

@@ -1,0 +1,44 @@
+"-----------------------------------
+" Settings
+"-----------------------------------
+syntax enable
+set hidden
+set nowrap
+set noswapfile
+set encoding=utf-8
+set pumheight=10
+set fileencoding=utf-8
+set ruler
+set cmdheight=2
+set iskeyword+=-
+set mouse=a
+set splitbelow
+set splitright
+set t_Co=256
+set showtabline=2
+set conceallevel=0
+set tabstop=4 softtabstop=4
+set nohlsearch
+set noerrorbells
+set smarttab
+set shiftwidth=4
+set expandtab
+set smartindent
+set autoindent
+set relativenumber
+set scrolloff=8
+set laststatus=0
+set number
+set cursorline
+set background=dark
+set noshowmode
+set nobackup
+set nowritebackup
+set shortmess+=c
+set signcolumn=yes
+set termguicolors
+set updatetime=300
+set redrawtime=10000
+set formatoptions-=cro
+set clipboard=unnamedplus
+set completeopt=menuone,noinsert,noselect
