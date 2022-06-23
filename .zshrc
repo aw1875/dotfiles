@@ -47,6 +47,8 @@ alias pip="pip3"
 # Prompt Setup
 # -----------------------------------
 setopt PROMPT_SUBST
+autoload -U add-zsh-hook
+add-zsh-hook precmd updatePrompt
 
 # -----------------------------------
 # Path Exports
