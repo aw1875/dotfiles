@@ -10,9 +10,11 @@ ZSHSetup() {
 
 # Update Dotfiles
 getDotfiles() {
+    cd ~/.dotfiles
+
     if [[ $(git rev-parse @) == $(git rev-parse @ "$UPSTREAM") ]] then
         echo '${COLOR_USR}Updating config${COLOR_DEF}'
-        cd ~/.dotfiles && git pull --quiet origin master && source .zshrc
+        cd git pull --quiet origin master && source .zshrc
         echo '${COLOR_USR}Installing plugins${COLOR_DEF}'
         vim -E -s -u "~/.dotfiles/nvim/init.vim" +PlugInstall +qall
         echo '${COLOR_SUCCESS}Done!${COLOR_DEF}'
