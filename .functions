@@ -12,6 +12,7 @@ ZSHSetup() {
 getDotfiles() {
     cd ~/.dotfiles
     if git merge-base --is-ancestor origin/master master; then
+        print -P '{COLOR_SUCCESS}Up to date!${COLOR_DEF}'
     else
         print -P '${COLOR_UPDATES}Updating config${COLOR_DEF}'
         git pull --quiet origin master
