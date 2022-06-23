@@ -5,6 +5,9 @@ source ~/.dotfiles/.variables
 source ~/.dotfiles/.functions
 source ~/.dotfiles/.aliases
 
+source ~/.dotfiles/private/.functions
+source ~/.dotfiles/private/.aliases
+
 # -----------------------------------
 # Update DotFiles
 # -----------------------------------
