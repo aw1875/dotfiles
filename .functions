@@ -10,16 +10,22 @@ ZSHSetup() {
 
 # Update Dotfiles
 getDotfiles() {
+    echo -e "\e[38;5;214mChecking for updates\e[0m"
     cd ~/.dotfiles
+
+    git fetch --quiet
     if git merge-base --is-ancestor origin/master master; then
-        print -P '{COLOR_SUCCESS}Up to date!${COLOR_DEF}'
+        print -P '\e[38;5;76mUp to date!\e[0m'
+        sleep 1
+        clear
         cd ~
     else
-        print -P '${COLOR_UPDATES}Updating config${COLOR_DEF}'
+        print -P '\e[38;5;214mUpdating config\e[0m'
         git pull --quiet origin master
-        print -P '${COLOR_FINISHING}Installing plugins${COLOR_DEF}'
+        print -P '\e[38;5;220mInstalling plugins\e[0m'
         vim -E -s -u "~/.dotfiles/nvim/init.vim" +PlugInstall +qall
-        print -P '${COLOR_SUCCESS}Done!${COLOR_DEF}'
+        print -P '\e[38;5;76mDone!\e[0m'
+        sleep 1
         clear
         cd ~
     fi
