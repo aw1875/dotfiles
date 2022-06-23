@@ -16,6 +16,8 @@ source ~/.config/nvim/plugins/es7-snippets.vim
 source ~/.config/nvim/plugins/nvim-tree.vim
 source ~/.config/nvim/plugins/telescope.vim
 source ~/.config/nvim/plugins/vim-commentary.vim
+source ~/.config/nvim/plugins/vim-devicons.vim
+source ~/.config/nvim/plugins/vim-fugitive.vim
 source ~/.config/nvim/plugins/vim-heritage.vim
 source ~/.config/nvim/plugins/vim-lastplace.vim
 source ~/.config/nvim/plugins/vim-one.vim 

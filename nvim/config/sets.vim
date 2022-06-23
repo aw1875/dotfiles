@@ -9,7 +9,7 @@ set encoding=utf-8
 set pumheight=10
 set fileencoding=utf-8
 set ruler
-set cmdheight=2
+set cmdheight=1
 set iskeyword+=-
 set mouse=a
 set splitbelow
@@ -38,6 +38,7 @@ set shortmess+=c
 set signcolumn=yes
 set termguicolors
 set updatetime=300
+set timeoutlen=300
 set redrawtime=10000
 set formatoptions-=cro
 set clipboard=unnamedplus
