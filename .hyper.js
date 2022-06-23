@@ -11,7 +11,7 @@ module.exports = {
     css: "",
     termCSS: "",
     showHamburgerMenu: "",
-    showWindowControls: "true",
+    showWindowControls: "false",
     padding: "12px 14px",
     colors: {
       black: "#000000",
