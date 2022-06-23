@@ -6,8 +6,6 @@ module.exports = {
     cursorColor: "rgba(248,28,229,0.8)",
     cursorShape: "UNDERLINE",
     foregroundColor: "#fff",
-    backgroundColor: "rgba(0,0,0,0.3)",
-    borderColor: "#333",
     css: "",
     termCSS: "",
     showHamburgerMenu: "",
@@ -33,12 +31,15 @@ module.exports = {
     },
     bell: "false",
     copyOnSelect: true,
+    opacity: {
+      focus: 0.97,
+      blur: 0.7,
+    },
     hyperBorder: {
       borderColors: ["#E18335", "#ffffff"],
     },
   },
   plugins: [
-    "hyper-material-theme",
     "hyperborder",
     "hyper-opacity",
     "hyper-tab-icons",
