@@ -2,6 +2,7 @@
 # Sources
 # -----------------------------------
 source ~/.dotfiles/.functions
+source ~/.dotfiles/.variables
 
 # -----------------------------------
 # Update DotFiles
@@ -45,13 +46,7 @@ alias pip="pip3"
 # -----------------------------------
 # Prompt Setup
 # -----------------------------------
-COLOR_DEF=$'\e[0m'
-COLOR_USR=$'\e[38;5;208m'
-COLOR_DIR=$'\e[38;5;75m'
-COLOR_GITCLEAN=$'\e[38;5;117m'
-COLOR_GITDIRTY=$'\e[38;5;184m'
 setopt PROMPT_SUBST
-PROMPT='${COLOR_USR}[wolfy] ▶ ${COLOR_DIR}%1~ ${COLOR_DEF}'
 
 # -----------------------------------
 # Path Exports
