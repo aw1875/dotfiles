@@ -27,6 +27,7 @@ getDotfiles() {
         print -P '\e[38;5;76mDone!\e[0m'
         sleep 1
         clear
+        source ~/.zshrc
         cd ~
     fi
 }
