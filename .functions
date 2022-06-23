@@ -11,13 +11,8 @@ ZSHSetup() {
 # Update Dotfiles
 getDotfiles() {
     cd ~/.dotfiles
-
-    UPSTREAM=${1:-'@{u}'}
-    LOCAL=$(git rev-parse @)
-    REMOTE=$(git rev-parse "$UPSTREAM")
-    BASE=$(git merge-base @ "$UPSTREAM")
-
-    if [ $LOCAL = $BASE ]; then
+    if git merge-base --is-ancestor origin/master master; then
+    else
         print -P '${COLOR_UPDATES}Updating config${COLOR_DEF}'
         git pull --quiet origin master
         print -P '${COLOR_FINISHING}Installing plugins${COLOR_DEF}'
@@ -26,7 +21,6 @@ getDotfiles() {
         clear
         cd ~
     fi
-
 }
 
 # Parse Git Branch

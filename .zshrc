@@ -1,8 +1,8 @@
 # -----------------------------------
 # Sources
 # -----------------------------------
-source ~/.dotfiles/.functions
 source ~/.dotfiles/.variables
+source ~/.dotfiles/.functions
 
 # -----------------------------------
 # Update DotFiles
