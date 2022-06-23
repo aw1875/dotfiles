@@ -24,6 +24,7 @@ getDotfiles() {
         git pull --quiet origin master
         print -P '\e[38;5;220mInstalling plugins\e[0m'
         vim -E -s -u "~/.dotfiles/nvim/init.vim" +PlugInstall +qall
+        cp .hyper.js ~/
         print -P '\e[38;5;76mDone!\e[0m'
         sleep 1
         clear
@@ -50,4 +51,16 @@ updatePrompt() {
     else
         PROMPT='${COLOR_USR}[wolfy] ▶ ${COLOR_DIR}%1~ ${COLOR_DEF}'$PROMPT
     fi
+}
+
+# Hide Desktop
+hide() {
+    defaults write com.apple.Finder CreateDesktop false
+    killall Finder
+}
+
+# Show Desktop
+show() {
+    defaults write com.apple.Finder CreateDesktop true
+    killall Finder
 }

@@ -1,0 +1,31 @@
+# -----------------------------------
+# Custom Aliases
+# -----------------------------------
+alias vim="nvim"
+alias ll="ls -l"
+alias lla="ll -A"
+alias vei="cd \"/Volumes/External HDD/iOS Development\" && clear"
+alias vew="cd \"/Volumes/External HDD/Web Development\" && clear"
+alias cdd="cd ~/.dotfiles && clear"
+alias ..="cd .."
+alias ..."cd ../../"
+alias hd=hide
+alias sd=show
+
+# -----------------------------------
+# Git Aliases
+# -----------------------------------
+alias gc="git checkout"
+alias gd="git diff"
+alias gs="git status"
+alias gp="git push"
+alias ga="git add"
+alias gcm="git commit -m"
+alias gwa="git worktree add"
+alias gwr="git worktree remove"
+
+# -----------------------------------
+# Python Aliases
+# -----------------------------------
+alias python="python3"
+alias pip="pip3"
