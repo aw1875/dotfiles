@@ -6,7 +6,7 @@ source ~/.dotfiles/.functions
 # -----------------------------------
 # Update DotFiles
 # -----------------------------------
-getDotFiles
+getDotfiles
 
 # -----------------------------------
 # ZSH Setup
@@ -53,15 +53,7 @@ COLOR_GITDIRTY=$'\e[38;5;184m'
 setopt PROMPT_SUBST
 PROMPT='${COLOR_USR}[wolfy] ▶ ${COLOR_DIR}%1~ ${COLOR_DEF}'
 
-# Git Status
-# if [ -n "$(parse_git_branch)" ]; then
-#     if [ -n "$(git status --porcelain)" ]; then
-#         PROMPT='${COLOR_USR}[wolfy] ▶ ${COLOR_DIR}%1~ ${COLOR_GITDIRTY}$(parse_git_branch)${COLOR_DEF} '$PROMPT
-#     else
-#         PROMPT='${COLOR_USR}[wolfy] ▶ ${COLOR_DIR}%1~ ${COLOR_GITCLEAN}$(parse_git_branch)${COLOR_DEF} '$PROMPT
-#     fi
-# else
-#     PROMPT='${COLOR_USR}[wolfy] ▶ ${COLOR_DIR}%1~ ${COLOR_DEF}'$PROMPT
-# fi
-
+# -----------------------------------
+# Path Exports
+# -----------------------------------
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

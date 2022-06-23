@@ -10,7 +10,7 @@ ZSHSetup() {
 
 # Update Dotfiles
 getDotfiles() {
-    cd ~/.dotfiles && git pull --quiet origin master
+    cd ~/.dotfiles && git pull --quiet origin master && source .zshrc
     vim -E -s -u "~/.dotfiles/nvim/init.vim" +PlugInstall +qall
     cd ~
 }
