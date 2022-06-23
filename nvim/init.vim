@@ -32,7 +32,6 @@ call plug#end()
 " Color Scheme
 "-----------------------------------
 colorscheme one
-source ~/.config/nvim/themes/airline.vim
 
 "-----------------------------------
 " Lua Plugins 
