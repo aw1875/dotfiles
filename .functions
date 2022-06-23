@@ -12,15 +12,21 @@ ZSHSetup() {
 getDotfiles() {
     cd ~/.dotfiles
 
-    if [[ $(git rev-parse @) == $(git rev-parse @ "$UPSTREAM") ]] then
-        echo '${COLOR_USR}Updating config${COLOR_DEF}'
-        cd git pull --quiet origin master && source .zshrc
-        echo '${COLOR_USR}Installing plugins${COLOR_DEF}'
+    UPSTREAM=${1:-'@{u}'}
+    LOCAL=$(git rev-parse @)
+    REMOTE=$(git rev-parse "$UPSTREAM")
+    BASE=$(git merge-base @ "$UPSTREAM")
+
+    if [ $LOCAL = $BASE ]; then
+        print -P '${COLOR_UPDATES}Updating config${COLOR_DEF}'
+        git pull --quiet origin master
+        print -P '${COLOR_FINISHING}Installing plugins${COLOR_DEF}'
         vim -E -s -u "~/.dotfiles/nvim/init.vim" +PlugInstall +qall
-        echo '${COLOR_SUCCESS}Done!${COLOR_DEF}'
-        cd ~
+        print -P '${COLOR_SUCCESS}Done!${COLOR_DEF}'
         clear
+        cd ~
     fi
+
 }
 
 # Parse Git Branch
