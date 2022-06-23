@@ -1,0 +1,37 @@
+# Setup ZSH Themes
+ZSHSetup() {
+    if [[ $HOST == "VPN.lan" ]] then
+        export ZSH="/Users/adamwolf/.oh-my-zsh"
+        ZSH_THEME="powerlevel9k/powerlevel9k"
+        plugins=(git)
+        source $ZSH/oh-my-zsh.sh
+    fi
+}
+
+# Update Dotfiles
+getDotfiles() {
+    cd ~/.dotfiles && git pull --quiet origin master
+    vim -E -s -u "~/.dotfiles/nvim/init.vim" +PlugInstall +qall
+    cd ~
+}
+
+# Parse Git Branch
+parse_git_branch() {
+    git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/(\1)/p'
+}
+
+# Run on cd
+chpwd() {
+    PROMPT=''
+
+    if [ -n "$(parse_git_branch)" ]; then
+        if [ -n "$(git status --porcelain)" ]; then
+            PROMPT='${COLOR_USR}[wolfy] ▶ ${COLOR_DIR}%1~ ${COLOR_GITDIRTY}$(parse_git_branch)${COLOR_DEF} '$PROMPT
+        else
+            PROMPT='${COLOR_USR}[wolfy] ▶ ${COLOR_DIR}%1~ ${COLOR_GITCLEAN}$(parse_git_branch)${COLOR_DEF} '$PROMPT
+        fi
+    else
+        PROMPT='${COLOR_USR}[wolfy] ▶ ${COLOR_DIR}%1~ ${COLOR_DEF}'$PROMPT
+    fi
+}
+
