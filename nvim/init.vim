@@ -13,6 +13,7 @@ source ~/.config/nvim/plugins/airline.vim
 source ~/.config/nvim/plugins/coc-tailwind-intellisence.vim
 source ~/.config/nvim/plugins/coc.vim
 source ~/.config/nvim/plugins/es7-snippets.vim
+source ~/.config/nvim/plugins/markdown-preview.vim
 source ~/.config/nvim/plugins/nvim-tree.vim
 source ~/.config/nvim/plugins/telescope.vim
 source ~/.config/nvim/plugins/vim-commentary.vim
