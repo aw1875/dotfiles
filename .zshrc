@@ -7,6 +7,7 @@ source ~/.dotfiles/.aliases
 
 source ~/.dotfiles/private/.functions
 source ~/.dotfiles/private/.aliases
+source ~/.dotfiles/private/.exports
 
 # -----------------------------------
 # Update DotFiles
