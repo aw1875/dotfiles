@@ -1,0 +1,1 @@
+Plug 'glepnir/dashboard-nvim'
