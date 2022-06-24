@@ -5,6 +5,7 @@ let g:coc_global_extensions = [
             \ 'coc-eslint',
             \ 'coc-snippets',
             \ 'https://github.com/rodrigore/coc-tailwind-intellisense',
+            \ 'coc-prettier',
             \ ]
 
 inoremap <silent><expr> <TAB>

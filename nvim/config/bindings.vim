@@ -20,16 +20,17 @@ nnoremap <A-S-Down> yy :pu<CR>
 inoremap <A-S-Down> <Esc>yy :pu<CR>
 vnoremap <A-S-Down> y :'<,'>pu<CR>
 
-" Auto close [] and {}
-inoremap [ [<CR><CR>]<Up><Tab>
-inoremap { {<CR><CR>}<Up><Tab>
+" Auto close (), [], and {}
+inoremap ( ()<Left>
+inoremap [ []<Left>
+inoremap { {}<Left>
 
 " Switching Tabs
-nnoremap <C-e>     :bp<CR>
-nnoremap <C-r>     :bn<CR>
-nnoremap <C-w>     :bw<CR>
+nnoremap <C-e> :bp<CR>
+nnoremap <C-r> :bn<CR>
+nnoremap <C-w> :bw<CR>
 
 " NVIM Tree Bindings
-nnoremap <leader>nn    :NvimTreeOpen<CR>
-nnoremap <C-g>         :NvimTreeToggle<CR>
-nnoremap <leader>n     :NvimTreeFocus<CR>
+nnoremap <leader>nn :NvimTreeOpen<CR>
+nnoremap <C-g>      :NvimTreeToggle<CR>
+nnoremap <leader>n  :NvimTreeFocus<CR>
