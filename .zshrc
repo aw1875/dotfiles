@@ -12,7 +12,7 @@ source ~/.dotfiles/private/.exports
 # -----------------------------------
 # Update DotFiles
 # -----------------------------------
-getDotfiles
+checkUpdates
 
 # -----------------------------------
 # ZSH Setup
