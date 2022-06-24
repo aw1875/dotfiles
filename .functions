@@ -17,7 +17,7 @@ getDotfiles() {
                 git pull --quiet origin master
                 echo -e '\e[38;5;220mInstalling plugins\e[0m'
                 vim -E -s -u "~/.dotfiles/nvim/init.vim" +PlugInstall +qall
-                cp .hyper.js ~/
+                cp -i .hyper.js ~/
                 echo -e '\e[38;5;76mDone!\e[0m'
                 sleep 1
                 clear
