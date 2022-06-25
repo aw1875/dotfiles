@@ -45,5 +45,5 @@ lua require('aw1875')
 "-----------------------------------
 augroup Format 
     autocmd!
-    autocmd BufWritePre,InsertLeave * Prettier
+    autocmd BufWritePre * Prettier
 augroup END
