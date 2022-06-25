@@ -36,3 +36,8 @@ nnoremap <C-q> :bw<CR>
 nnoremap <leader>nn :NvimTreeOpen<CR>
 nnoremap <leader>t  :NvimTreeToggle<CR>
 nnoremap <leader>nf  :NvimTreeFocus<CR>
+
+" FloatTerm Bindings
+nnoremap <leader>tn :FloatermNew<CR>
+nnoremap <leader>tt :FloatermToggle<CR>
+nnoremap <leader>tr :FloatermNew --position=rightbelow --width=0.25 --wintype=vsplit<CR>
