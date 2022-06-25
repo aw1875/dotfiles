@@ -30,7 +30,7 @@ inoremap " ""<Left>
 " Switching Tabs
 nnoremap <C-e> :bp<CR>
 nnoremap <C-r> :bn<CR>
-nnoremap <C-w> :bw<CR>
+nnoremap <C-q> :bw<CR>
 
 " NVIM Tree Bindings
 nnoremap <leader>nn :NvimTreeOpen<CR>
