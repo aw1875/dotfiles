@@ -7,10 +7,10 @@ let mapleader = ' '
 map gf :e <cfile><CR>
 
 " Move Line
-nnoremap <A-k>     :m-2<CR>
-nnoremap <A-j>   :m+<CR>
-inoremap <A-k> <Esc> :m-2 i<CR>
-inoremap <A-Down> <Esc> :m+ i<CR>
+nnoremap <A-k>      :m-2<CR>
+nnoremap <A-j>      :m+<CR>
+inoremap <A-k> <Esc>:m-2<CR> i
+inoremap <A-j> <Esc>:m+<CR> i
 
 " Duplicate Line
 nnoremap <A-S-Up> yy        :pu!<CR>
