@@ -42,5 +42,5 @@ set timeoutlen=300
 set redrawtime=10000
 set formatoptions-=cro
 set foldmethod=manual
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 set completeopt=menuone,noinsert,noselect
