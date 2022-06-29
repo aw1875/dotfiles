@@ -14,10 +14,10 @@ luasnip.config.set_config({
 	ext_prio_increase = 1,
 	enable_autosnippets = true,
 })
-vim.keymap.set({ "i", "s" }, "<leader><leader>", function()
-  if luasnip.expand_or_jumpable() then
-    luasnip.expand_or_jump()
-  end 
-end, { silent = true })
+-- vim.keymap.set({ "i", "s" }, "<leader><leader>", function()
+--   if luasnip.expand_or_jumpable() then
+--     luasnip.expand_or_jump()
+--   end 
+-- end, { silent = true })
 
 require("luasnip.loaders.from_vscode").lazy_load()

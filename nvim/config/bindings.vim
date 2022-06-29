@@ -6,6 +6,9 @@ let mapleader = ' '
 " Open File
 map gf :e <cfile><CR>
 
+" Source File
+nnoremap <A-x> :so %<CR>
+
 " Move Line
 nnoremap <A-k>      :m-2<CR>
 nnoremap <A-j>      :m+<CR>

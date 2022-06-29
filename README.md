@@ -18,15 +18,22 @@
 
 - [vim-airline](https://github.com/vim-airline/vim-airline) - Lean & mean status/tabline for vim that's light as air
   - [vim-airline-themes](https://github.com/vim-airline/vim-airline-themes) - A collection of themes for vim-airline
-- [coc](https://github.com/neoclide/coc.nvim) - Nodejs extension host for vim & neovim, load extensions like VSCode and host language servers
-  - [coc-tailwind-intellisense](https://github.com/rodrigore/coc-tailwind-intellisense) - Coc.nvim extension for Tailwind CSS IntelliSense
-- [es7-snippets](https://github.com/dsznajder/vscode-react-javascript-snippets) - Extension for React/Javascript snippets with search supporting ES7+ and babel features
+- [dashboard-vim](https://github.com/glepnir/dashboard-nvim) - Vim Dashboard
 - [markdown-preview](https://github.com/iamcco/markdown-preview.nvim) - Markdown preview plugin for (neo)vim
+- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) - A completion plugin for neovim coded in Lua.
+  - [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp) - Nvim-cmp source for neovim builtin LSP client
+  - [cmp-buffer](https://github.com/hrsh7th/cmp-buffer) - Nvim-cmp source for buffer words
+  - [cmp-path](https://github.com/hrsh7th/cmp-path) - Nvim-cmp source for path
+  - [LuaSnip](https://github.com/L3MON4D3/LuaSnip) - Snippet Engine for Neovim written in Lua.
+  - [cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip) - Luasnip completion source for nvim-cmp
+  - [lspkind-nvim](https://github.com/onsails/lspkind.nvim) - Vscode-like pictograms for neovim lsp completion items
+- [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) - Quickstart configs for Nvim LSP
 - [nvim-tree](https://github.com/kyazdani42/nvim-tree.lua) - A file explorer tree for neovim written in lua
   - [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) - Lua `fork` of vim-web-devicons for neovim
 - [telescope](https://github.com/nvim-telescope/telescope.nvim) - Find, Filter, Preview, Pick. All lua, all the time.
 - [vim-commentary](https://github.com/tpope/vim-commentary) - Comment stuff out
 - [vim-devicons](https://github.com/ryanoasis/vim-devicons) - Adds file type icons to Vim plugins such as: NERDTree, vim-airline, CtrlP, unite, Denite, lightline, vim-startify and many more
+- [vim-floaterm](https://github.com/voldikss/vim-floaterm) - Terminal manager for (neo)vim
 - [vim-fugitive](https://github.com/tpope/vim-fugitive) - A Git wrapper so awesome, it should be illegal
 - [vim-heritage](https://github.com/jessarcher/vim-heritage) - Automatically create missing parent directories when saving a new file
 - [vim-lastplace](https://github.com/farmergreg/vim-lastplace) - Intelligently reopen files at your last edit position in Vim.
