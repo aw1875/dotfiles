@@ -1,0 +1,16 @@
+{
+    "name": "VSCode",
+    "contributes": {
+        "snippets": [
+            {
+                "language": [
+                   "javascript",
+                   "typescript",
+                   "javascriptreact",
+                   "typescriptreact"
+                ],
+                "path": "./es7-snips.json"
+            }
+        ]
+    }
+}
