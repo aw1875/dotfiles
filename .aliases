@@ -8,7 +8,7 @@ alias vei="cd \"/Volumes/External HDD/iOS Development\" && clear"
 alias vew="cd \"/Volumes/External HDD/Web Development\" && clear"
 alias cdd="cd ~/.dotfiles && clear"
 alias ..="cd .."
-alias ..."cd ../../"
+alias ...="cd ../../"
 alias hd=hide
 alias sd=show
 
