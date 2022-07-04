@@ -129,4 +129,4 @@ XF86AudioMute
 
 # Screenshot
 shift + @Print
-	scrot -s --line mode=edge ~/Pictures/Screenshots/%Y-%m-%d_%H%M%S-$wx$h_scrot.png
+	scrot -s --line mode=edge ~/Pictures/Screenshots/%Y-%m-%d_%H%M%S.png
