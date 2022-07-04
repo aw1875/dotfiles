@@ -1,0 +1,252 @@
+;==========================================================
+;
+; THIS IS AN EXAMPLE CONFIGURATION FILE!
+; IT IS NOT SUPPOSED TO WORK OUT OF THE BOX SINCE IS CONTAINS
+; SETTINGS THAT ARE SPECIFIC TO THE MACHINE WHICH WAS USED
+; TO GENERATE IT.
+; Please refer to the web documentation hosted at:
+; https://github.com/polybar/polybar#configuration
+; and
+; https://github.com/polybar/polybar/wiki/Configuration
+; if you want to automatically generate one for you.
+;
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+background = #282C32
+background-alt = #282A36
+foreground = #ABB2BF
+foreground-alt = #ABB2BF
+primary = #98C379
+secondary = #E06C75
+alert = #98C379
+red = #DD1142
+
+[bar/main]
+monitor = HDMI-0
+width = 100%
+height = 30
+offset-y = 1%
+fixed-center = true
+
+background = #00000000
+foreground = ${colors.foreground}
+
+padding-left = 2
+padding-right = 2
+
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = FiraCode Nerd Font:size=10;2
+font-1 = FiraCode Nerd Font:size=14;3
+font-2 = FiraCode Nerd Font:size=18;3px
+
+modules-left = round-left bspwm round-right
+modules-center = round-left name round-right
+modules-right = round-left pulseaudio round-right round-left wired-network round-right round-left date round-right round-left powermenu round-right 
+
+wm-restack = bspwm
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[bar/secondary]
+monitor = DP-1
+width = 100%
+height = 30
+offset-y = 1%
+fixed-center = true
+
+background = #00000000
+foreground = ${colors.foreground}
+
+padding-left = 2
+padding-right = 2
+
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = FiraCode Nerd Font:size=10;2
+font-1 = FiraCode Nerd Font:size=14;3
+font-2 = FiraCode Nerd Font:size=18;3px
+
+modules-left = round-left bspwm round-right
+modules-center = round-left name round-right
+modules-right = round-left date round-right round-left powermenu round-right
+
+wm-restack = bspwm
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/bspwm]
+type = internal/bspwm
+pin-workspaces = true
+
+inline-mode = false
+label-focused = ""
+label-occupied = ""
+label-empty = ""
+
+label-focused-padding = 1px
+label-occupied-padding = 1px
+label-empty-padding = 1px
+label-focused-background = ${colors.background}  
+label-occupied-background = ${colors.background}  
+label-empty-background = ${colors.background}  
+label-focused-foreground = ${colors.primary}  
+label-occupied-foreground = ${colors.primary}  
+label-empty-foreground = ${colors.primary}  
+
+[module/wired-network]
+type = internal/network
+interface = enp34s0
+internal = 1.0
+
+format-connected = <label-connected>
+format-connected-font = 2
+label-connected = 
+label-connected-background = ${colors.background}
+label-connected-foreground = ${colors.primary}
+label-connected-padding = 0
+
+format-disconnected = <label-disconnected>
+format-disconnected-font = 2
+label-disconnected = 
+label-disconnected-background = ${colors.background}
+label-disconnected-foreground = ${colors.red}
+label-disconnected-padding = 0
+
+
+[module/date]
+type = internal/date
+interval = 1.0
+
+date = "%a %b %d" 
+time = %I:%M %p
+time-alt = %I:%M:%S %p
+
+format-foreground = ${colors.primary}
+format-background = ${colors.background}
+
+format-prefix = " "
+format-prefix-foreground = ${colors.primary}
+format-prefix-background = ${colors.background}
+
+label = %date% %time%
+
+[module/pulseaudio]
+type = internal/pulseaudio
+use-ui-max = true
+interval = 5
+
+format-volume = <ramp-volume> <label-volume> 
+ramp-volume-font = 2
+format-volume-foreground = ${colors.primary}
+format-volume-background = ${colors.background}
+
+label-volume = %percentage%%
+
+label-muted = ﱝ
+format-muted-font = 2
+label-muted-foreground = ${colors.secondary}
+label-muted-background = ${colors.background}
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+ramp-volume-4 = 
+ramp-volume-5 = 
+ramp-volume-6 = 
+ramp-volume-7 = 
+ramp-volume-8 = 
+ramp-volume-9 = 
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 0
+
+label-open = ""
+label-open-font = 2
+label-open-foreground = ${colors.primary}
+label-open-background = ${colors.background}
+label-close = "  cancel"
+label-close-background = ${colors.background}
+label-close-foreground = ${colors.secondary}
+
+menu-0-0 = " 勒 reboot"
+menu-0-0-exec = menu-open-1
+menu-0-0-background = ${colors.background}
+menu-0-1 = " 﫼 log out"
+menu-0-1-exec = "menu-open-2"
+menu-0-1-background = ${colors.background}
+menu-0-2 = "  power off"
+menu-0-2-exec = menu-open-3
+menu-0-2-background = ${colors.background}
+
+menu-1-0 = " 勒 reboot"
+menu-1-0-exec = sudo reboot
+menu-1-0-background = ${colors.background}
+
+menu-2-0 = " 﫼 log out"
+menu-2-0-exec = bspc quit
+menu-2-0-background = ${colors.background}
+
+menu-3-0 = "  power off"
+menu-3-0-exec = sudo poweroff
+menu-3-0-background = ${colors.background}
+
+
+[module/round-right]
+type = custom/text
+content = 
+content-font = 3
+content-foreground = ${colors.background}
+
+[module/round-left]
+type = custom/text
+content = 
+content-font = 3
+content-foreground = ${colors.background}
+
+[module/name]
+type=custom/text
+content = "WOLFY'S PC"
+content-background = ${colors.background}
+content-foreground = ${colors.primary}
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+; vim:ft=dosini
+

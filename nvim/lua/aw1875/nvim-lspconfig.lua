@@ -18,13 +18,21 @@ local on_attach = function()
     vim.keymap.set("n", "<leader>sr", "<CMD>Telescope lsp_references<CR>", { buffer = 0 })
 end
 
-nvim_lsp.tsserver.setup {
-    on_attach = on_attach,
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-}
 
-nvim_lsp.tailwindcss.setup {
-    on_attach = on_attach,
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-}
-
+local servers = { 'tsserver', 'tailwindcss', 'clangd', 'sourcekit' }
+for _, server in pairs(servers) do
+    if server == clangd then
+        nvim_lsp[server].setup {
+            on_attach = on_attach,
+            capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+            root_pattern = (
+                'compile_commands.json'
+            )
+        }
+    else
+        nvim_lsp[server].setup {
+            on_attach = on_attach,
+            capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        }
+    end
+end

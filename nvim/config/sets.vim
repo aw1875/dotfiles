@@ -44,3 +44,4 @@ set formatoptions-=cro
 set foldmethod=manual
 set clipboard+=unnamedplus
 set completeopt=menuone,noinsert,noselect
+set laststatus=3
