@@ -126,3 +126,7 @@ XF86Audio{RaiseVolume,LowerVolume}
 
 XF86AudioMute
 	amixer -D pulse set Master toggle
+
+# Screenshot
+shift + @Print
+	scrot -s --line mode=edge ~/Pictures/Screenshots/%Y-%m-%d_%H%M%S-$wx$h_scrot.png

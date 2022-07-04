@@ -2,6 +2,13 @@
 
 <img src="images/nvim.png" />
 
+### WM
+- [bspwm](https://github.com/baskerville/bspwm) - A tiling window manager based on binary space partiioning
+  - [sxhkd](https://github.com/baskerville/sxhkd) - Simple X hotkey daemon
+  - [polybar](https://github.com/polybar/polybar) - A fast and easy-to-use status bar
+  - [compton](https://github.com/chjj/compton) - A compositor for X11
+  - [feh](https://github.com/derf/feh) - A fast and light image viewer
+
 ### CLI
 
 - [ZSH](https://zsh.sourceforge.io/) - A shell designed for interactive use
@@ -13,6 +20,7 @@
   - [hyper-cwd](https://github.com/hharnisc/hypercwd) - Opens new tabs with the same directory as the current tab in Hyper
   - [hyperminimal](https://github.com/jancborchardt/hyperminimal) - Hyper terminal extension to remove window header
   - [hyper-snazzy](https://github.com/sindresorhus/hyper-snazzy) - Elegant Hyper theme with bright colors
+- [neofetch](https://github.com/dylanaraps/neofetch) - A command-line system information took written in bash 3.2+
 
 ### Plugins
 
