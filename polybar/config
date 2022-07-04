@@ -217,7 +217,6 @@ menu-3-0 = "  power off"
 menu-3-0-exec = sudo poweroff
 menu-3-0-background = ${colors.background}
 
-
 [module/round-right]
 type = custom/text
 content = 
