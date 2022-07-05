@@ -14,7 +14,7 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 xrandr --output HDMI-0 --primary --mode 1920x1080 --rotate normal --output DP-1 --mode 1920x1080 --rotate normal --left-of HDMI-0
 
 # Setup Mouse Sens
-xinput --set-prop 12 "libinput Accel Speed" -1
+xinput --set-prop pointer:'USB Gaming Mouse' 'libinput Accel Speed' -1
 
 bspc monitor DP-1 -d I II III IV V 
 bspc monitor HDMI-0 -d I II III IV V
