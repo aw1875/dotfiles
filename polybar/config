@@ -57,8 +57,9 @@ module-margin-right = 0
 font-0 = FiraCode Nerd Font:size=10;2
 font-1 = FiraCode Nerd Font:size=14;3
 font-2 = FiraCode Nerd Font:size=18;3px
+font-3 = Menlo:size=10;3
 
-modules-left = round-left bspwm round-right
+modules-left = round-left bspwm round-right round-left github round-right
 modules-center = round-left name round-right
 modules-right = round-left pulseaudio round-right round-left wired-network round-right round-left date round-right round-left powermenu round-right 
 
@@ -86,8 +87,9 @@ module-margin-right = 0
 font-0 = FiraCode Nerd Font:size=10;2
 font-1 = FiraCode Nerd Font:size=14;3
 font-2 = FiraCode Nerd Font:size=18;3px
+font-3 = Menlo:size=10;3
 
-modules-left = round-left bspwm round-right
+modules-left = round-left bspwm round-right round-left github round-right
 modules-center = round-left name round-right
 modules-right = round-left date round-right round-left powermenu round-right
 
@@ -151,6 +153,7 @@ format-prefix-foreground = ${colors.primary}
 format-prefix-background = ${colors.background}
 
 label = %date% %time%
+label-font = 4
 
 [module/pulseaudio]
 type = internal/pulseaudio
@@ -192,30 +195,37 @@ label-open-font = 2
 label-open-foreground = ${colors.primary}
 label-open-background = ${colors.background}
 label-close = "  cancel"
+label-close-font = 4
 label-close-background = ${colors.background}
 label-close-foreground = ${colors.secondary}
 
-menu-0-0 = " 勒 reboot"
+menu-0-0 = "    勒 reboot"
 menu-0-0-exec = menu-open-1
+menu-0-0-font = 4
 menu-0-0-background = ${colors.background}
-menu-0-1 = " 﫼 log out"
+menu-0-1 = "    﫼 log out"
 menu-0-1-exec = "menu-open-2"
 menu-0-1-background = ${colors.background}
-menu-0-2 = "  power off"
+menu-0-1-font = 4
+menu-0-2 = "     power off"
 menu-0-2-exec = menu-open-3
 menu-0-2-background = ${colors.background}
+menu-0-2-font = 4
 
-menu-1-0 = " 勒 reboot"
+menu-1-0 = "    勒 reboot"
 menu-1-0-exec = sudo reboot
 menu-1-0-background = ${colors.background}
+menu-1-0-font = 4
 
-menu-2-0 = " 﫼 log out"
+menu-2-0 = "    﫼 log out"
 menu-2-0-exec = bspc quit
 menu-2-0-background = ${colors.background}
+menu-2-0-font = 4
 
-menu-3-0 = "  power off"
+menu-3-0 = "     power off"
 menu-3-0-exec = sudo poweroff
 menu-3-0-background = ${colors.background}
+menu-3-0-font = 4
 
 [module/round-right]
 type = custom/text
@@ -232,8 +242,27 @@ content-foreground = ${colors.background}
 [module/name]
 type=custom/text
 content = "WOLFY'S PC"
+content-font = 4
 content-background = ${colors.background}
 content-foreground = ${colors.primary}
+
+[module/github]
+type = internal/github
+token = ${file:~/.dotfiles/gh.token}
+
+label = "%notifications%"
+label-foreground = ${colors.primary}
+label-background = ${colors.background}
+label-font = 4
+
+format-prefix = " "
+format-prefix-font = 2
+format-prefix-foreground = ${colors.primary}
+format-prefix-background = ${colors.background}
+
+user = aw1875
+empty-notifications = true
+interval = 30
 
 [settings]
 screenchange-reload = true
