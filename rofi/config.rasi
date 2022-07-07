@@ -1,0 +1,88 @@
+configuration {
+  display-drun: "Applications:";
+  drun-display-format: "{icon}      {name}";
+  font: "Menlo 11";
+  modi: "drun";
+  show-icons: true;
+}
+
+@theme "/dev/null"
+
+* {
+  bg: #282C34;
+  bg-alt: #4B4D4F;
+  secondary: #2B2F39;
+  primary: #98C379;
+  fg-alt: #ABB2BF;
+
+  background-color: @bg;
+
+  border: 0;
+  margin: 0;
+  padding: 0;
+  spacing: 0;
+}
+
+window {
+  width: 45%;
+  border: 25;
+  border-radius: 5;
+}
+
+element {
+  padding: 12;
+  margin: 0 0 5 0;
+  text-color: @fg-alt;
+  border-radius: 5;
+}
+
+element selected {
+  text-color: @secondary;
+  background-color: @primary;
+  border-radius: 5;
+}
+
+element-text {
+  background-color: inherit;
+  text-color: inherit;
+  vertical-align: 0.5;
+}
+
+element-icon {
+  size: 30;
+  background-color: #00000000;
+}
+
+entry {
+  background-color: @secondary;
+  padding: 12;
+  text-color: @fg-alt;
+}
+
+inputbar {
+  children: [prompt, entry];
+  margin: 0 0 15 0;
+  border: 1px solid;
+  border-color: @primary;
+  border-radius: 5;
+}
+
+listview {
+  background-color: @bg;
+  columns: 1;
+  lines: 8;
+}
+
+mainbox {
+  background-color: @bg;
+  children: [inputbar, listview];
+}
+
+prompt {
+  background-color: @secondary;
+  enabled: true;
+  padding: 12 0 0 12;
+  text-color: @fg-alt;
+}
+
+/* vim: ft=sass

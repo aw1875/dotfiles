@@ -29,7 +29,7 @@
 ;==========================================================
 
 [colors]
-background = #282C32
+background = #282C34
 background-alt = #282A36
 foreground = #ABB2BF
 foreground-alt = #ABB2BF
@@ -166,6 +166,7 @@ format-volume-foreground = ${colors.primary}
 format-volume-background = ${colors.background}
 
 label-volume = %percentage%%
+label-volume-font = 4
 
 label-muted = ﱝ
 format-muted-font = 2

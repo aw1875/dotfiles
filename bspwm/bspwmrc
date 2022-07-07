@@ -5,7 +5,7 @@ $HOME/.config/polybar/launch.sh &
 $HOME/.config/compton/launch.sh &
 
 # Set BG and Cursor
-feh --bg-fill $HOME/Pictures/Wallpapers/wallhaven-5wvp21.jpg
+feh --bg-fill $HOME/Pictures/Wallpapers/peakpx.jpg
 xsetroot -cursor_name left_ptr &
 
 pgrep -x sxhkd > /dev/null || sxhkd &
