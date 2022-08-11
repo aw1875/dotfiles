@@ -214,7 +214,8 @@ menu-0-2-background = ${colors.background}
 menu-0-2-font = 4
 
 menu-1-0 = "    勒 reboot"
-menu-1-0-exec = sudo reboot
+; menu-1-0-exec = sudo reboot
+menu-1-0-exec = reboot
 menu-1-0-background = ${colors.background}
 menu-1-0-font = 4
 

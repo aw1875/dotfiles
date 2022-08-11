@@ -63,5 +63,6 @@ updatePrompt() {
 # Parse Git Branch
 # -----------------------------------
 parseGitBranch() {
+    # git rev-parse --is-inside-work-tree >/dev/null 2>&1
     git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/(\1)/p'
 }
