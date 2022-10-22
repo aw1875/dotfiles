@@ -19,7 +19,8 @@ local on_attach = function()
 end
 
 
-local servers = { 'tsserver', 'tailwindcss', 'clangd', 'sourcekit' }
+local servers = { 'tsserver', 'tailwindcss', 'clangd', 'sourcekit', 'pyright' }
+
 for _, server in pairs(servers) do
     if server == clangd then
         nvim_lsp[server].setup {
@@ -28,6 +29,13 @@ for _, server in pairs(servers) do
             root_pattern = (
                 'compile_commands.json'
             )
+        }
+    elseif server == typescript then
+        nvim_lsp.tsserver.setup {
+            on_attach = on_attach,
+            filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx' },
+            cmd = { 'typescript-language-server', '--stdio' },
+            capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
         }
     else
         nvim_lsp[server].setup {
