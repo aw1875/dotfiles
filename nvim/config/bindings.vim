@@ -23,6 +23,10 @@ nnoremap <A-S-Down> yy      :pu<CR>
 inoremap <A-S-Down> <Esc>yy :pu<CR>
 vnoremap <A-S-Down> y       :'<,'>pu<CR>
 
+" JSON Formatting
+nnoremap <leader>jp :.!jq .<CR>
+vnoremap <leader>jm :%!jq -c<CR>
+
 " Auto close
 inoremap ( ()<Left>
 inoremap [ []<Left>
