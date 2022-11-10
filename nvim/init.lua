@@ -4,7 +4,7 @@
 local sets, _ = pcall(require, 'wolfy.config.sets')
 if not sets then
 	print('Failed to load sets')
-return
+	return
 end
 
 local keybinds, _ = pcall(require, 'wolfy.config.keybinds')
@@ -37,7 +37,6 @@ require('wolfy.after')
 -------------------------------------
 local Format = vim.api.nvim_create_augroup("Format", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre *", {
-    command = "lua vim.lsp.buf.formatting_sync(nil, 100)",
-    group = Format,
+	command = "lua vim.lsp.buf.formatting_sync(nil, 100)",
+	group = Format,
 })
-
