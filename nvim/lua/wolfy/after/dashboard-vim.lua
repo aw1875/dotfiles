@@ -1,4 +1,5 @@
 vim.g.dashboard_default_excutive = 'telescope'
+
 local db = require('dashboard')
 db.preview_command = 'cat | lolcat -S 2'
 db.preview_file_path = '~/.config/nvim/static/wolfy.cat'
@@ -14,15 +15,16 @@ db.custom_center = {
         action = 'Telescope find_files find_command=rg,--hidden,--files',
         shortcut = 'SPC f f' },
     { icon = '  ',
-        desc = 'File Browser                            ',
+        desc = 'Find Buffer                            ',
         action = 'Telescope file_browser',
         shortcut = 'SPC f b' },
     { icon = '  ',
-        desc = 'Find word                              ',
+        desc = 'Find Word                              ',
         action = 'Telescope live_grep',
         shortcut = 'SPC f g' },
     { icon = '  ',
-        desc = 'Open Personal dotfiles                  ',
+        desc = 'Search Personal Dotfiles               ',
         action = 'Telescope dotfiles path=~/.dotfiles',
         shortcut = 'SPC f d' },
 }
+db.custom_footer = { "" }
