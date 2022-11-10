@@ -35,6 +35,7 @@ add-zsh-hook precmd updatePrompt
 # Path Exports
 # -----------------------------------
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH=$PATH:/usr/local/go/bin
 
 # bun completions
 [ -s "/home/adamwolf/.bun/_bun" ] && source "/home/adamwolf/.bun/_bun"

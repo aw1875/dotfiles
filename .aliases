@@ -2,15 +2,18 @@
 # Custom Aliases
 # -----------------------------------
 alias vim="nvim"
-alias ll="ls -l"
-alias lla="ll -A"
+alias ls="ls --color"
+alias ll="ls -l --color"
+alias lla="ll -A --color"
 alias vei="cd \"/Volumes/External HDD/iOS Development\" && clear"
 alias vew="cd \"/Volumes/External HDD/Web Development\" && clear"
 alias cdd="cd ~/.dotfiles && clear"
 alias ..="cd .."
 alias ...="cd ../../"
+alias ....="cd ../../../"
 alias hd=hide
 alias sd=show
+alias :q="exit"
 
 # -----------------------------------
 # Git Aliases
