@@ -5,7 +5,7 @@ $HOME/.config/polybar/launch.sh &
 $HOME/.config/compton/launch.sh &
 
 # Set BG and Cursor
-feh --bg-fill $HOME/Pictures/Wallpapers/peakpx.jpg
+feh --bg-fill $HOME/Pictures/Wallpapers/wallhaven-j5v2lm.jpg
 xsetroot -cursor_name left_ptr &
 
 pgrep -x sxhkd > /dev/null || sxhkd &
@@ -19,15 +19,22 @@ xinput --set-prop pointer:'USB Gaming Mouse' 'libinput Accel Speed' -1
 bspc monitor DP-1 -d I II III IV V 
 bspc monitor HDMI-0 -d I II III IV V
 
-bspc config border_width            0
-bspc config window_gap              5
+# Gap Variable
+gap = 5
 
-bspc config split_ratio             0.52
+# Configs
+bspc config border_width            0
+bspc config window_gap              $gap
+
+bspc config top_padding             -$gap
+bspc config bottom_padding          -$gap
+bspc config left_padding            -$gap
+bspc config right_padding           -$gap
+
+bspc config split_ratio             0.5
 bspc config borderless_monocle      true
 bspc config gapless_monocle         true
 
-bspc rule -a Gimp desktop='^8' state=floating follow=on
-bspc rule -a Chromium desktop='^2'
-bspc rule -a mplayer2 state=floating
-bspc rule -a Kupfer.py focus=on
+# Rules
+bspc rule -a Spotify state=floating center=false
 bspc rule -a Screenkey manage=off

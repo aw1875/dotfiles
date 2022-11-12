@@ -62,3 +62,7 @@ window:
   padding:
     x: 10
     y: 20
+
+key_bindings:
+  - { key: Right, mods: Control, chars: "\x1BF" }
+  - { key: Left,  mods: Control, chars: "\x1BB" }
