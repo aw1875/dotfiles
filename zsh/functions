@@ -31,6 +31,9 @@ PromptSetup() {
         fi
     }
     setopt prompt_subst
+
+    # Setup Bindings
+    Bindings
 }
 
 # -----------------------------------
@@ -130,6 +133,11 @@ ec() {
     else
         printf "\033[31m'$1' is not a valid file\033[0m\n"
     fi
+}
+
+Bindings() {
+    autoload edit-command-line; zle -N edit-command-line
+    bindkey '^e' edit-command-line
 }
 
 # vim: set filetype=zsh :
