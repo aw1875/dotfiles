@@ -1,6 +1,6 @@
 <h1 align="center">🏠 wolfy's dotfiles 🏠</h1>
 
-<img src="images/nvim.png" />
+<img src="images/desktop.png" />
 
 ### WM
 - [bspwm](https://github.com/baskerville/bspwm) - A tiling window manager based on binary space partiioning
