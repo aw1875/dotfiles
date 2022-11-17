@@ -34,6 +34,18 @@ PromptSetup() {
 }
 
 # -----------------------------------
+# Setup History
+# -----------------------------------
+SetupHistory() {
+    HISTFILE=~/.cache/zsh/history
+    HISTSIZE=10000
+    SAVEHIST=10000
+    HISTTIMEFORMAT="[%F %T] "
+    setopt EXTENDED_HISTORY
+    setopt SHARE_HISTORY
+}
+
+# -----------------------------------
 # Check for Updates
 # -----------------------------------
 checkUpdates() {

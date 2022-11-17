@@ -8,9 +8,10 @@ source ~/.dotfiles/zsh/private/aliases
 source ~/.dotfiles/zsh/private/exports
 
 # -----------------------------------
-# Setup Prompt
+# Setup Prompt & History
 # -----------------------------------
 PromptSetup
+SetupHistory
 
 # -----------------------------------
 # Setup Plugins

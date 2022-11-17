@@ -17,6 +17,8 @@ alias ..="cd .."
 alias ...="cd ../../"
 alias ....="cd ../../../"
 
+alias history="history -E"
+
 alias hd=hide
 alias sd=show
 
