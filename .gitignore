@@ -3,5 +3,10 @@
 plugged
 *.token
 *BACKUP
+
+# ZSH
 zsh/private
 zsh/plugins
+
+# TestsCases
+nvim/lua/wolfy/after/tests.lua
