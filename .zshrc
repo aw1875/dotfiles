@@ -1,45 +1,21 @@
 # -----------------------------------
 # Sources
 # -----------------------------------
-source ~/.dotfiles/.variables
 source ~/.dotfiles/.functions
 source ~/.dotfiles/.aliases
 
-source ~/.dotfiles/private/.functions
 source ~/.dotfiles/private/.aliases
 source ~/.dotfiles/private/.exports
 
 # -----------------------------------
-# Update DotFiles
+# Setup Prompt
 # -----------------------------------
-checkUpdates
+PromptSetup
 
 # -----------------------------------
-# ZSH Setup
+# Setup Plugins
 # -----------------------------------
-ZSHSetup
+Plugin "zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+Plugin "zsh-autosuggestions/zsh-autosuggestions.zsh"
 
-# -----------------------------------
-# Run neofetch
-# -----------------------------------
-neofetch
-
-# -----------------------------------
-# Prompt Setup
-# -----------------------------------
-setopt PROMPT_SUBST
-autoload -U add-zsh-hook
-add-zsh-hook precmd updatePrompt
-
-# -----------------------------------
-# Path Exports
-# -----------------------------------
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export PATH=$PATH:/usr/local/go/bin
-
-# bun completions
-[ -s "/home/adamwolf/.bun/_bun" ] && source "/home/adamwolf/.bun/_bun"
-
-# Bun
-export BUN_INSTALL="/home/adamwolf/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+# vim: set filetype=zsh :

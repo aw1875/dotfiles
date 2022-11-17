@@ -2,17 +2,24 @@
 # Custom Aliases
 # -----------------------------------
 alias vim="nvim"
+
 alias ls="grc ls --color"
 alias ll="grc ls -l --color"
 alias lla="grc ls -Al --color"
+
+alias tree="tree -C"
+
 alias vei="cd \"/Volumes/External HDD/iOS Development\" && clear"
 alias vew="cd \"/Volumes/External HDD/Web Development\" && clear"
 alias cdd="cd ~/.dotfiles && clear"
+
 alias ..="cd .."
 alias ...="cd ../../"
 alias ....="cd ../../../"
+
 alias hd=hide
 alias sd=show
+
 alias :q="exit"
 
 # -----------------------------------
@@ -32,3 +39,14 @@ alias gwr="git worktree remove"
 # -----------------------------------
 alias python="python3"
 alias pip="pip3"
+
+# -----------------------------------
+# Config Aliases
+# -----------------------------------
+alias zrc='${=EDITOR} ~/.zshrc'
+alias szrc='source ~/.zshrc'
+
+# -----------------------------------
+# Check for dotfiles updates
+# -----------------------------------
+alias dotup=checkUpdates

@@ -9,7 +9,7 @@ local map = require('wolfy.extra').map
 map('n', 'gf', ':e <cfile><CR>')
 
 -- Source File
-map('n', '<A-x>', ':so %<CR> :echo "Reloaded Config"<CR>')
+map('n', '<A-x>', ':so %<CR>')
 
 -- Move Live
 map('n', '<A-k>', ':m-2<CR>')
@@ -49,9 +49,8 @@ map('n', '<leader>t', ':NvimTreeToggle<CR>')
 map('n', '<leader>nf', ':NvimTreeFocus<CR>')
 
 -- TestCases Bindings
-map('n', '<leader>tc', ':TestCases<CR>')
+map('n', '<leader>tc', ':Tests<CR>')
 
 return {
   map = map,
-  test = test
 }

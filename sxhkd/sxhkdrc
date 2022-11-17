@@ -128,9 +128,14 @@ super + {Left,Down,Up,Right}
 XF86Audio{RaiseVolume,LowerVolume}
 	amixer -D pulse set Master 5%{+,-} unmute
 
+# mute
 XF86AudioMute
 	amixer -D pulse set Master toggle
 
 # Screenshot
 shift + @Print
 	scrot -s --line mode=edge ~/Pictures/Screenshots/%Y-%m-%d_%H%M%S.png
+
+# Programs
+super + shift + x
+	gnome-calculator

@@ -39,7 +39,7 @@ for _, server in pairs(servers) do
             capabilities = cmp_nvim_lsp.default_capabilities(),
             settings = {
                 Lua = {
-                    diagnostics = { globals = { 'vim' } }
+                    diagnostics = { globals = { 'vim', 'P' } }
                 }
             }
         }

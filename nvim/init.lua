@@ -13,6 +13,11 @@ if not keybinds then
 	return
 end
 -------------------------------------
+-- Globals
+-------------------------------------
+require('wolfy.globals')
+
+-------------------------------------
 -- Extra Functions
 -------------------------------------
 require('wolfy.extra')

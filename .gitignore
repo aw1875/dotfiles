@@ -4,3 +4,4 @@ plugged
 private
 *.token
 *BACKUP
+zsh/plugins

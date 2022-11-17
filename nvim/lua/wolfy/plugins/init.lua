@@ -3,7 +3,6 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
 -- Temp
 local Plug = vim.fn['plug#']
 Plug 'ThePrimeagen/vim-be-good'
-Plug '~/.config/nvim/plugged/testcases.nvim'
 Plug('dsznajder/vscode-es7-javascript-react-snippets', { ['do'] = 'yarn install --frozen-lockfile && yarn compile' })
 
 require('wolfy.plugins.airline')
@@ -24,5 +23,11 @@ require('wolfy.plugins.vim-polyglot')
 require('wolfy.plugins.vim-ripgrep')
 require('wolfy.plugins.vim-visual-multi')
 require('wolfy.plugins.which-key')
+
+-- CS Tests
+Plug 'aw1875/tests.nvim'
+
+-- Local
+Plug '~/Documents/dev/nvim-plugins/practice.nvim'
 
 vim.call('plug#end')

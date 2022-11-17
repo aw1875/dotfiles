@@ -1,19 +1,56 @@
 # -----------------------------------
+# Source Plugins
+# -----------------------------------
+Plugin() {
+    source ~/.dotfiles/zsh/plugins/$1
+}
+
+# -----------------------------------
+# Setup Prompt
+# -----------------------------------
+PromptSetup() {
+    autoload -U colors && colors
+    autoload -Uz vcs_info
+    zstyle ':vcs_info:*' enable git svn
+    zstyle ':vcs_info:git:*' formats " %b%"
+
+    precmd() {
+        vcs_info
+
+        if [[ -n ${vcs_info_msg_0_} ]]; then
+            STATUS=$(command git status --porcelain 2> /dev/null | tail -n1)
+            if [[ -n $STATUS ]]; then
+                RPROMPT="%{$bg[red]%}%{$fg_bold[black]%} ${vcs_info_msg_0_}  %{$reset_color%} "
+
+            else
+                RPROMPT="%{$bg[green]%}%{$fg_bold[black]%} ${vcs_info_msg_0_}  %{$reset_color%} "
+            fi
+        else
+            PROMPT="%B%{$fg[green]%}[wolfy] ▶ %{$fg[cyan]%}%c%{$reset_color%} "
+            RPROMPT=""
+        fi
+    }
+    setopt prompt_subst
+}
+
+# -----------------------------------
 # Check for Updates
 # -----------------------------------
 checkUpdates() {
-    if [[ $PWD != $OLDPWD || $PWD = $HOME ]]; then
-        echo -e "\e[38;5;214mChecking for updates\e[0m"
-        cd ~/.dotfiles
-        git fetch --quiet
-        if git merge-base --is-ancestor origin/master master; then
-            print -P '\e[38;5;76mUp to date!\e[0m'
-            sleep 1
-            clear
-            cd ~
-        else
-            updateConfirmation
-        fi
+    echo "$fg[blue]Checking for updates"
+    cd ~/.dotfiles
+    git fetch --quiet
+
+    # Check if up to date
+    if git merge-base --is-ancestor origin/master master; then
+        echo "$fg[green]Up to date!"
+        sleep 1
+        cd - > /dev/null
+        clear
+    else
+        updateConfirmation
+        cd - > /dev/null
+        clear
     fi
 }
 
@@ -22,47 +59,65 @@ checkUpdates() {
 # Update / Continue
 # -----------------------------------
 updateConfirmation() {
-    if read -q "choice?${COLOR_SUCCESS}Updates available. Would you like to continue? (y/n):${COLOR_DEF} "; then
-        clear
-        echo -e '\e[38;5;214mUpdating configs\e[0m'
+    if read -q "choice?$fg[blue]Updates available. Would you like to continue? (y/n):$reset_color "; then
+        echo "\n$fg[cyan]Updating Configs"
+
+        # Pull updated dotfiles
         git pull --quiet origin master
-        echo -e '\e[38;5;220mInstalling plugins\e[0m'
-        vim -E -s -u "~/.dotfiles/nvim/init.vim" +PlugInstall +qall
-        cp -i .hyper.js ~/
-        echo -e '\e[38;5;76mDone!\e[0m'
+
+        # Update nvim plugins
+        echo "$fg[cyan]Installing Plugins"
+        vim -E -s -u "~/.dotfiles/nvim/init.lua" +PlugInstall +qall
+
+        # Finished
+        echo "$fg[green]Done!"
         sleep 1
         clear
         source ~/.zshrc
-        cd ~
-    else
-        echo -e '\n\e[38;5;214mOK!\e[0m'
-        sleep 1
-        clear
-        cd ~
     fi
 }
 
 # -----------------------------------
-# Update Prompt
+# Helper Functions
 # -----------------------------------
-updatePrompt() {
-    PROMPT=''
-
-    if [ -n "$(parseGitBranch)" ]; then
-        if [ -n "$(git status --porcelain)" ]; then
-            PROMPT='${COLOR_USR}[wolfy] ▶ ${COLOR_DIR}%1~ ${COLOR_GITDIRTY}$(parseGitBranch)${COLOR_DEF} '$PROMPT
-        else
-            PROMPT='${COLOR_USR}[wolfy] ▶ ${COLOR_DIR}%1~ ${COLOR_GITCLEAN}$(parseGitBranch)${COLOR_DEF} '$PROMPT
-        fi
+ec() {
+    if [ -f $1 ]; then
+        case $1 in
+            *.tar.bz2)
+                FILENAME=$1
+                mkdir -p "${FILENAME%%.*}-extracted" 
+                tar xjf $1 -C "${FILENAME%%.*}-extracted"
+                ;;
+            *.tar.gz)
+                FILENAME=$1
+                mkdir -p "${FILENAME%%.*}-extracted" 
+                tar xzf $1 -C "${FILENAME%%.*}-extracted"
+                ;;
+            *.tar)
+                FILENAME=$1
+                mkdir -p "${FILENAME%%.*}-extracted" 
+                tar xf $1  -C "${FILENAME%%.*}-extracted"
+                ;;
+            *.tbz2)
+                FILENAME=$1
+                mkdir -p "${FILENAME%%.*}-extracted" 
+                tar xjf $1 -C "${FILENAME%%.*}-extracted"
+                ;;
+            *.rar)
+                FILENAME=$1
+                mkdir -p "${FILENAME%%.*}-extracted" 
+                unrar x $1 "${FILENAME%%.*}-extracted"
+                ;;
+            *.zip)
+                FILENAME=$1
+                mkdir -p "${FILENAME%%.*}-extracted" 
+                unzip $1 -d "${FILENAME%%.*}-extracted"
+                ;;
+            *)          printf "\033[31m'$1' cannot be extracted\033[0m\n" ;;
+        esac
     else
-        PROMPT='${COLOR_USR}[wolfy] ▶ ${COLOR_DIR}%1~ ${COLOR_DEF}'$PROMPT
+        printf "\033[31m'$1' is not a valid file\033[0m\n"
     fi
 }
 
-# -----------------------------------
-# Parse Git Branch
-# -----------------------------------
-parseGitBranch() {
-    # git rev-parse --is-inside-work-tree >/dev/null 2>&1
-    git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/(\1)/p'
-}
+# vim: set filetype=zsh :
