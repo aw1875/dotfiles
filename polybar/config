@@ -91,7 +91,7 @@ font-3 = Menlo:size=10;3
 
 modules-left = round-left bspwm round-right round-left github round-right
 modules-center = round-left name round-right
-modules-right = round-left date round-right round-left powermenu round-right
+modules-right = round-left pulseaudio round-right round-left date round-right round-left powermenu round-right
 
 wm-restack = bspwm
 
@@ -214,7 +214,6 @@ menu-0-2-background = ${colors.background}
 menu-0-2-font = 4
 
 menu-1-0 = "    勒 reboot"
-; menu-1-0-exec = sudo reboot
 menu-1-0-exec = reboot
 menu-1-0-background = ${colors.background}
 menu-1-0-font = 4
@@ -243,7 +242,7 @@ content-foreground = ${colors.background}
 
 [module/name]
 type=custom/text
-content = "WOLFY'S PC"
+content = " WOLFY'S LINUX "
 content-font = 4
 content-background = ${colors.background}
 content-foreground = ${colors.primary}
@@ -268,15 +267,9 @@ interval = 30
 
 [settings]
 screenchange-reload = true
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = source
-;compositing-border = over
-;pseudo-transparency = false
 
 [global/wm]
 margin-top = 5
 margin-bottom = 5
 
 ; vim:ft=dosini
-
