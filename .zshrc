@@ -1,11 +1,11 @@
 # -----------------------------------
 # Sources
 # -----------------------------------
-source ~/.dotfiles/.functions
-source ~/.dotfiles/.aliases
+source ~/.dotfiles/zsh/functions
+source ~/.dotfiles/zsh/aliases
 
-source ~/.dotfiles/private/.aliases
-source ~/.dotfiles/private/.exports
+source ~/.dotfiles/zsh/private/aliases
+source ~/.dotfiles/zsh/private/exports
 
 # -----------------------------------
 # Setup Prompt

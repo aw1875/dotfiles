@@ -1,7 +1,7 @@
 .DS_Store
 *.backup
 plugged
-private
 *.token
 *BACKUP
+zsh/private
 zsh/plugins
