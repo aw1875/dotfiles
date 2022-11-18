@@ -4,16 +4,17 @@
 
 ### WM
 - [bspwm](https://github.com/baskerville/bspwm) - A tiling window manager based on binary space partiioning
-  - [sxhkd](https://github.com/baskerville/sxhkd) - Simple X hotkey daemon
-  - [polybar](https://github.com/polybar/polybar) - A fast and easy-to-use status bar
   - [compton](https://github.com/chjj/compton) - A compositor for X11
+  - [dunst](https://github.com/dunst-project/dunst) - Lightweight and customizable notification daemon
   - [feh](https://github.com/derf/feh) - A fast and light image viewer
+  - [polybar](https://github.com/polybar/polybar) - A fast and easy-to-use status bar
+  - [sxhkd](https://github.com/baskerville/sxhkd) - Simple X hotkey daemon
 
 ### CLI
 
-- [ZSH](https://zsh.sourceforge.io/) - A shell designed for interactive use
 - [Alacritty](https://github.com/alacritty/alacritty) - A cross-platform, OpenGL terminal emulator
 - [neofetch](https://github.com/dylanaraps/neofetch) - A command-line system information took written in bash 3.2+
+- [ZSH](https://zsh.sourceforge.io/) - A shell designed for interactive use
 
 ### Plugins
 
@@ -45,7 +46,3 @@
 - [vim-ripgrep](https://github.com/jremmen/vim-ripgrep) - Use RipGrep in Vim and display results in a quickfix list
 - [vim-visual-multi](https://github.com/mg979/vim-visual-multi) - Multiple cursors plugin for vim/neovim
 - [which-key](https://github.com/folke/which-key.nvim) - Create key bindings that stick. WhichKey is a lua plugin for Neovim 0.5 that displays a popup with possible keybindings of the command you started typing
-
-### Notes
-
-If you intend you use these dotfiles please take a look at the `.zshrc` file and accompanying sources (`.variables`, `.functions`, `.aliases`) and make changes so that it fits your needs. Currently, the `.zshrc` config will use a function to check for configs and match them with this repo to keep them all up-to-date.
