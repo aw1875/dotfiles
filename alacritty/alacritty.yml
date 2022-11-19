@@ -64,5 +64,5 @@ window:
     y: 20
 
 key_bindings:
-  - { key: Right, mods: Control, chars: "\x1BF" }
-  - { key: Left,  mods: Control, chars: "\x1BB" }
+  - { key: Right, mods: Control, chars: "\eF" }
+  - { key: Left, mods: Control, chars: "\eB" }
