@@ -3,6 +3,7 @@
 plugged
 *.token
 *BACKUP
+*.bak
 
 # ZSH
 zsh/private
