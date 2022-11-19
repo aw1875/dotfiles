@@ -8,6 +8,10 @@ $HOME/.config/compton/launch.sh &
 feh --bg-fill $HOME/Pictures/Wallpapers/wallhaven-j5v2lm.jpg
 xsetroot -cursor_name left_ptr &
 
+# Fix Screen Timout
+xset -dpms s off &
+
+# Setup sxhkd
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 # Setup Monitors
