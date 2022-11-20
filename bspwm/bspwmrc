@@ -37,4 +37,4 @@ bspc config gapless_monocle         true
 
 # Rules
 bspc rule -a Gnome-calculator state=floating center=false
-bspc rule -a Themes state=floating center=true
+bspc rule -a themes state=floating center=true
