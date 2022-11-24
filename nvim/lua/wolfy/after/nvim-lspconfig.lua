@@ -21,7 +21,8 @@ end
 -- Setup Mason
 require('mason').setup()
 require('mason-lspconfig').setup({
-    ensure_installed = { 'tsserver', 'quick_lint_js', 'gopls', 'tailwindcss', 'clangd', 'pyright', 'jdtls', 'sumneko_lua' }
+    ensure_installed = { 'tsserver', 'quick_lint_js', 'gopls', 'tailwindcss', 'clangd', 'pyright', 'jdtls', 'sumneko_lua',
+        'omnisharp_mono' }
 })
 local servers = require('mason-lspconfig').get_installed_servers()
 
@@ -42,6 +43,12 @@ for _, server in pairs(servers) do
                     diagnostics = { globals = { 'vim', 'P' } }
                 }
             }
+        }
+    elseif server == "omnisharp_mono" then
+        nvim_lsp[server].setup {
+            root_dir = nvim_lsp.util.root_pattern("*.csproj", "*.sln"),
+            on_attach = on_attach,
+            capabilities = cmp_nvim_lsp.default_capabilities(),
         }
     else
         nvim_lsp[server].setup {

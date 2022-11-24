@@ -4,6 +4,7 @@ plugged
 *.token
 *BACKUP
 *.bak
+*.luarc.json
 
 # ZSH
 zsh/private
