@@ -90,7 +90,7 @@ updateConfirmation() {
 
         # Finished
         echo "$fg[green]Done!"
-        sleep 1
+        sleep 5
         clear
         source ~/.zshrc
     fi
