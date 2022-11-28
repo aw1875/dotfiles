@@ -42,6 +42,8 @@ require('wolfy.after')
 -------------------------------------
 local Format = vim.api.nvim_create_augroup("Format", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre *", {
-	command = "lua vim.lsp.buf.formatting_sync(nil, 100)",
+	callback = function()
+		vim.lsp.buf.format()
+	end,
 	group = Format,
 })
