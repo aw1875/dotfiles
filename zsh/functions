@@ -26,7 +26,11 @@ PromptSetup() {
                 RPROMPT="%{$bg[green]%}%{$fg_bold[black]%} ${vcs_info_msg_0_}  %{$reset_color%} "
             fi
         else
-            PROMPT="%B%{$fg[green]%}[wolfy] ▶ %{$fg[cyan]%}%c%{$reset_color%} "
+            if [[ "$USER" == "adamwolf" ]]; then
+                PROMPT="%B%{$fg[green]%}[wolfy] ▶ %{$fg[cyan]%}%c%{$reset_color%} "
+            else
+                PROMPT="%B%{$fg[green]%}[%n] ▶ %{$fg[cyan]%}%c%{$reset_color%} "
+            fi
             RPROMPT=""
         fi
     }
