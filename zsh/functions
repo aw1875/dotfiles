@@ -86,7 +86,7 @@ updateConfirmation() {
 
         # Update nvim plugins
         echo "$fg[cyan]Installing Plugins"
-        vim -E -s -u "~/.dotfiles/nvim/init.lua" +PlugInstall +qall
+        nvim -E -s -u "~/.dotfiles/nvim/init.lua" +PlugInstall +qall
 
         # Finished
         echo "$fg[green]Done!"

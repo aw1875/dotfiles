@@ -139,3 +139,6 @@ shift + @Print
 # Programs
 super + shift + x
 	gnome-calculator
+
+alt + i
+	bspc rule -a \* -o state=floating && alacritty
