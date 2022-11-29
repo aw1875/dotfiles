@@ -4,8 +4,8 @@
 alias vim="nvim"
 
 alias ls="grc ls --color"
-alias ll="grc ls -l --color"
-alias lla="grc ls -Al --color"
+alias ll="grc ls -lh --color"
+alias lla="grc ls -alh --color"
 
 alias tree="tree -C"
 
