@@ -16,8 +16,8 @@ map('n', '<A-k>', ':m-2<CR>')
 map('n', '<A-j>', ':m+<CR>')
 map('i', '<A-k>', '<Esc>:m-2<CR> i')
 map('i', '<A-j>', '<Esc>:m+<CR> i')
-map('v', '<A-k>', ':m \'>+<CR>gv=gv')
-map('v', '<A-j>', ':m \'<-2<CR>gv=gv')
+map('v', '<A-k>', ':m \'<-2<CR>gv=gv')
+map('v', '<A-j>', ':m \'>+<CR>gv=gv')
 
 -- Duplicate Line
 map('n', '<A-S-Up>', 'yy :pu!<CR>')
