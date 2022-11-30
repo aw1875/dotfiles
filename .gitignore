@@ -9,6 +9,3 @@ plugged
 # ZSH
 zsh/private
 zsh/plugins
-
-# Temp TMUX
-tmux

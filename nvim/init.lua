@@ -47,3 +47,25 @@ vim.api.nvim_create_autocmd("BufWritePre *", {
 	end,
 	group = Format,
 })
+
+-------------------------------------
+-- TMUX Window Formatting
+-------------------------------------
+local TMUX = vim.api.nvim_create_augroup("TMUX", { clear = true })
+local windowName = ""
+vim.api.nvim_create_autocmd("BufReadPost,FileReadPost,BufNewFile *", {
+	callback = function()
+		local process = io.popen("tmux display-message -p \"#W\"")
+		for line in process:lines() do
+			windowName = line
+		end
+		os.execute("tmux rename-window " .. vim.fn.expand("%:t"))
+	end,
+	group = TMUX,
+})
+vim.api.nvim_create_autocmd("ExitPre *", {
+	callback = function()
+		os.execute("tmux rename-window " .. windowName)
+	end,
+	group = TMUX,
+})
