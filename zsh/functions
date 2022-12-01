@@ -139,6 +139,25 @@ ec() {
     fi
 }
 
+mkcmp() {
+    if [ $# -eq 2 ]; then
+        case $1 in
+            bz2) tar -cvjf $2.tar.bz2 $2 ;;
+            gz) tar -czvf $2.tar.gz $2 ;;
+            rar) rar a $2.rar $2 ;;
+            zip) zip -r $2.zip $2 ;;
+            *) printf "\033[31m'$1' format not supported\033[0m\n" ;;
+        esac
+    else
+        printf "\033[31mInvalid Syntax\033[0m\n"
+        printf "Format should be: \033[32mmkcmp \033[36mformat \033[33mfolder\033[0m\n"
+    fi
+}
+
+large() {
+    sudo find / -xdev -type f -size +$1 -exec grc ls -Salh --color {} +
+}
+
 Bindings() {
     autoload edit-command-line; zle -N edit-command-line
     bindkey '^e' edit-command-line
