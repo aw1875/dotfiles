@@ -132,9 +132,13 @@ XF86Audio{RaiseVolume,LowerVolume}
 XF86AudioMute
 	amixer -D pulse set Master toggle
 
-# Screenshot
+# Screenshot + Clipboard
+super + shift + @Print
+	scrot -s --line mode=edge ~/Pictures/Screenshots/%s.png -e 'xclip -selection clipboard -t image/png -i $f'
+
+# Screenshot (Clipboard only)
 shift + @Print
-	scrot -s --line mode=edge ~/Pictures/Screenshots/%Y-%m-%d_%H%M%S.png
+	scrot -s --line mode=edge -e 'xclip -selection clipboard -t image/png -i $f'
 
 # Programs
 super + shift + x

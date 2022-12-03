@@ -74,7 +74,7 @@ shell:
   program: /usr/bin/zsh
   args:
     - -l
-    - -c 
+    - -c
     - "source ~/.zshrc; tmux attach || tmux"
 
 key_bindings:
