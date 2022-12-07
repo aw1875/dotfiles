@@ -28,7 +28,4 @@ require('wolfy.plugins.which-key')
 -- CS Tests
 Plug 'aw1875/tests.nvim'
 
--- Local
-Plug '~/Documents/dev/nvim-plugins/practice.nvim'
-
 vim.call('plug#end')

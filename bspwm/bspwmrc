@@ -15,13 +15,7 @@ xset -dpms s off &
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 # Setup Monitors
-xrandr --output HDMI-0 --primary --mode 1920x1080 --rotate normal --output DP-1 --mode 1920x1080 --rotate normal --left-of HDMI-0
-
-# Setup Mouse Sens
-xinput --set-prop pointer:'USB Gaming Mouse' 'libinput Accel Speed' -1
-
-bspc monitor DP-1 -d I II III IV V 
-bspc monitor HDMI-0 -d I II III IV V
+bspc monitor LVDS-1 -d I II III IV V
 
 # Configs
 bspc config border_width            0
@@ -37,4 +31,3 @@ bspc config gapless_monocle         true
 
 # Rules
 bspc rule -a Gnome-calculator state=floating center=false
-bspc rule -a themes state=floating center=true

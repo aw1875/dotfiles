@@ -39,7 +39,7 @@ alert = #98C379
 red = #DD1142
 
 [bar/main]
-monitor = HDMI-0
+monitor = LVDS-1
 width = 100%
 height = 30
 offset-y = 1%
@@ -59,9 +59,9 @@ font-1 = FiraCode Nerd Font:size=14;3
 font-2 = FiraCode Nerd Font:size=18;3px
 font-3 = Menlo:size=10;3
 
-modules-left = round-left bspwm round-right round-left github round-right
+modules-left = round-left bspwm round-right round-left battery round-right
 modules-center = round-left name round-right
-modules-right = round-left pulseaudio round-right round-left wired-network round-right round-left date round-right round-left powermenu round-right 
+modules-right = round-left pulseaudio round-right round-left wireless-network round-right round-left date round-right round-left powermenu round-right 
 
 wm-restack = bspwm
 
@@ -117,9 +117,9 @@ label-focused-foreground = ${colors.primary}
 label-occupied-foreground = ${colors.primary}  
 label-empty-foreground = ${colors.primary}  
 
-[module/wired-network]
+[module/wireless-network]
 type = internal/network
-interface = enp34s0
+interface = wlp3s0b1
 internal = 1.0
 
 format-connected = <label-connected>
@@ -191,7 +191,7 @@ expand-right = true
 
 format-spacing = 0
 
-label-open = ""
+label-open = "  "
 label-open-font = 2
 label-open-foreground = ${colors.primary}
 label-open-background = ${colors.background}
@@ -247,23 +247,49 @@ content-font = 4
 content-background = ${colors.background}
 content-foreground = ${colors.primary}
 
-[module/github]
-type = internal/github
-token = ${file:~/.dotfiles/gh.token}
+[module/battery]
+type = internal/battery
+full-at = 99
+low-at = 5
+battery = BAT0
+adapter = ADP1
+poll-interval = 5
 
-label = "%notifications%"
-label-foreground = ${colors.primary}
-label-background = ${colors.background}
-label-font = 4
+format-charging = <animation-charging>  <label-charging>
+format-discharging = <ramp-capacity>  <label-discharging>
 
-format-prefix = " "
-format-prefix-font = 2
-format-prefix-foreground = ${colors.primary}
-format-prefix-background = ${colors.background}
+format-charging-foreground = ${colors.primary}
+format-charging-background = ${colors.background}
 
-user = aw1875
-empty-notifications = true
-interval = 30
+format-discharging-foreground = ${colors.primary}
+format-discharging-background = ${colors.background}
+
+label-charging = %percentage%%
+label-discharging = %percentage%%
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+bar-capacity-width = 10
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-3 = 
+animation-discharging-4 = 
+
+animation-discharging-framerate = 500
+animation-low-framerate = 200
 
 [settings]
 screenchange-reload = true
