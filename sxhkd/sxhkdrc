@@ -134,7 +134,11 @@ XF86AudioMute
 
 # Brightness
 XF86MonBrightness{Up,Down}
-	brightnessctl set 355{+,-}
+	brightnessctl set 5%{+,-}
+
+# Keyboard brightness
+XF86KbdBrightness{Up,Down}
+	brightnessctl -d "smc::kbd_backlight" set 10%{+,-}
 
 # Screenshot + Clipboard
 super + shift + @Print

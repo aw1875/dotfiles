@@ -59,7 +59,7 @@ font-1 = FiraCode Nerd Font:size=14;3
 font-2 = FiraCode Nerd Font:size=18;3px
 font-3 = Menlo:size=10;3
 
-modules-left = round-left bspwm round-right round-left battery round-right
+modules-left = round-left bspwm round-right round-left battery round-right round-left backlight round-right
 modules-center = round-left name round-right
 modules-right = round-left pulseaudio round-right round-left wireless-network round-right round-left date round-right round-left powermenu round-right 
 
@@ -121,17 +121,18 @@ label-empty-foreground = ${colors.primary}
 type = internal/network
 interface = wlp3s0
 internal = 1.0
+accumulate-stats = true
 
 format-connected = <label-connected>
-format-connected-font = 2
-label-connected = 
+format-connected-font = 1
+label-connected =   %essid%
 label-connected-background = ${colors.background}
 label-connected-foreground = ${colors.primary}
 label-connected-padding = 0
 
 format-disconnected = <label-disconnected>
 format-disconnected-font = 2
-label-disconnected = 
+label-disconnected = 󰖪
 label-disconnected-background = ${colors.background}
 label-disconnected-foreground = ${colors.red}
 label-disconnected-padding = 0
@@ -192,41 +193,41 @@ expand-right = true
 format-spacing = 0
 
 label-open = "  "
-label-open-font = 2
+label-open-font = 1
 label-open-foreground = ${colors.primary}
 label-open-background = ${colors.background}
 label-close = "  cancel"
-label-close-font = 4
+label-close-font = 1
 label-close-background = ${colors.background}
 label-close-foreground = ${colors.secondary}
 
 menu-0-0 = "    勒 reboot"
 menu-0-0-exec = menu-open-1
-menu-0-0-font = 4
+menu-0-0-font = 1
 menu-0-0-background = ${colors.background}
 menu-0-1 = "    﫼 log out"
 menu-0-1-exec = "menu-open-2"
 menu-0-1-background = ${colors.background}
-menu-0-1-font = 4
+menu-0-1-font = 1
 menu-0-2 = "     power off"
 menu-0-2-exec = menu-open-3
 menu-0-2-background = ${colors.background}
-menu-0-2-font = 4
+menu-0-2-font = 1
 
 menu-1-0 = "    勒 reboot"
 menu-1-0-exec = reboot
 menu-1-0-background = ${colors.background}
-menu-1-0-font = 4
+menu-1-0-font = 1
 
 menu-2-0 = "    﫼 log out"
 menu-2-0-exec = bspc quit
 menu-2-0-background = ${colors.background}
-menu-2-0-font = 4
+menu-2-0-font = 1
 
 menu-3-0 = "     power off"
 menu-3-0-exec = sudo poweroff
 menu-3-0-background = ${colors.background}
-menu-3-0-font = 4
+menu-3-0-font = 1
 
 [module/round-right]
 type = custom/text
@@ -249,13 +250,13 @@ content-foreground = ${colors.primary}
 
 [module/battery]
 type = internal/battery
-full-at = 99
-low-at = 5
+full-at = 100
+low-at = 10
 battery = BAT0
 adapter = ADP1
 poll-interval = 5
 
-format-charging = <animation-charging>  <label-charging>
+format-charging = 󱐋 <animation-charging>  <label-charging>
 format-discharging = <ramp-capacity>  <label-discharging>
 
 format-charging-foreground = ${colors.primary}
@@ -290,6 +291,18 @@ animation-discharging-4 = 
 
 animation-discharging-framerate = 500
 animation-low-framerate = 200
+
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+use-actual-brightness = true
+format = <ramp> <label>
+format-foreground = ${colors.primary}
+format-background = ${colors.background}
+
+ramp-0 = 󰃞
+ramp-1 = 󰃟
+ramp-2 = 󰃠
 
 [settings]
 screenchange-reload = true
