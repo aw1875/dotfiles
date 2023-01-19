@@ -119,7 +119,7 @@ label-empty-foreground = ${colors.primary}
 
 [module/wireless-network]
 type = internal/network
-interface = wlp3s0b1
+interface = wlp3s0
 internal = 1.0
 
 format-connected = <label-connected>

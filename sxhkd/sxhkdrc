@@ -132,6 +132,10 @@ XF86Audio{RaiseVolume,LowerVolume}
 XF86AudioMute
 	amixer -D pulse set Master toggle
 
+# Brightness
+XF86MonBrightness{Up,Down}
+	brightnessctl set 355{+,-}
+
 # Screenshot + Clipboard
 super + shift + @Print
 	scrot -s --line mode=edge ~/Pictures/Screenshots/%s.png -e 'xclip -selection clipboard -t image/png -i $f'
