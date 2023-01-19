@@ -138,7 +138,7 @@ super + shift + @Print
 
 # Screenshot (Clipboard only)
 shift + @Print
-	scrot -s --line mode=edge -e 'xclip -selection clipboard -t image/png -i $f'
+	scrot -s --line mode=edge /tmp/%s.png -e 'xclip -selection clipboard -t image/png -i $f && rm $f'
 
 # Programs
 super + shift + x
