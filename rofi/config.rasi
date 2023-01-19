@@ -26,7 +26,7 @@ configuration {
 }
 
 window {
-  width: 45%;
+  width: 60%;
   border: 25;
   border-radius: 5;
 }
