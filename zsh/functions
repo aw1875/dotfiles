@@ -61,7 +61,7 @@ checkUpdates() {
     git fetch --quiet
 
     # Check if up to date
-    if git merge-base --is-ancestor origin/master master; then
+    if git merge-base --is-ancestor origin/laptop laptop; then
         echo "$fg[green]Up to date!"
         sleep 1
         cd - > /dev/null
