@@ -131,7 +131,7 @@ label-connected-foreground = ${colors.primary}
 label-connected-padding = 0
 
 format-disconnected = <label-disconnected>
-format-disconnected-font = 2
+format-disconnected-font = 1
 label-disconnected = 󰖪
 label-disconnected-background = ${colors.background}
 label-disconnected-foreground = ${colors.red}

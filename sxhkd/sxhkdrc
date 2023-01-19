@@ -141,12 +141,12 @@ XF86KbdBrightness{Up,Down}
 	brightnessctl -d "smc::kbd_backlight" set 10%{+,-}
 
 # Screenshot + Clipboard
-super + shift + @Print
+super + alt + s
 	scrot -s --line mode=edge ~/Pictures/Screenshots/%s.png -e 'xclip -selection clipboard -t image/png -i $f'
 
 # Screenshot (Clipboard only)
-shift + @Print
-	scrot -s --line mode=edge -e 'xclip -selection clipboard -t image/png -i $f'
+super + shift + s
+	scrot -s --line mode=edge /tmp/%s.png -e 'xclip -selection clipboard -t image/png -i $f && rm $f'
 
 # Programs
 super + shift + x
