@@ -243,7 +243,7 @@ content-foreground = ${colors.background}
 
 [module/name]
 type=custom/text
-content = " WOLFY'S LINUX "
+content = " WOLFY'S LAPTOP "
 content-font = 4
 content-background = ${colors.background}
 content-foreground = ${colors.primary}
