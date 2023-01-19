@@ -121,7 +121,6 @@ label-empty-foreground = ${colors.primary}
 type = internal/network
 interface = wlp3s0
 internal = 1.0
-accumulate-stats = true
 
 format-connected = <label-connected>
 format-connected-font = 1
@@ -132,7 +131,7 @@ label-connected-padding = 0
 
 format-disconnected = <label-disconnected>
 format-disconnected-font = 1
-label-disconnected = 󰖪 Disconnected
+label-disconnected = "󰖪 "
 label-disconnected-background = ${colors.background}
 label-disconnected-foreground = ${colors.secondary}
 label-disconnected-padding = 0
@@ -161,7 +160,7 @@ type = internal/pulseaudio
 use-ui-max = true
 interval = 5
 
-format-volume = <ramp-volume> <label-volume> 
+format-volume = <ramp-volume><label-volume> 
 ramp-volume-font = 2
 format-volume-foreground = ${colors.primary}
 format-volume-background = ${colors.background}
@@ -169,21 +168,21 @@ format-volume-background = ${colors.background}
 label-volume = %percentage%%
 label-volume-font = 4
 
-label-muted = ﱝ
-format-muted-font = 2
+label-muted = " "
+format-muted-font = 1
 label-muted-foreground = ${colors.secondary}
 label-muted-background = ${colors.background}
 
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
-ramp-volume-3 = 
-ramp-volume-4 = 
-ramp-volume-5 = 
-ramp-volume-6 = 
-ramp-volume-7 = 
-ramp-volume-8 = 
-ramp-volume-9 = 
+ramp-volume-0 = " "
+ramp-volume-1 = " "
+ramp-volume-2 = " "
+ramp-volume-3 = " "
+ramp-volume-4 = " "
+ramp-volume-5 = " "
+ramp-volume-6 = " "
+ramp-volume-7 = " "
+ramp-volume-8 = " "
+ramp-volume-9 = " "
 
 [module/powermenu]
 type = custom/menu
