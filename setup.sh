@@ -16,7 +16,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # Install Packages
 printf "${Cyan}Installing Packages (this may take a while)${Color_Off}"
-sudo apt-get install bspwm btop cmake compton curl dunst feh grc libfontconfig1-dev libfreetype6-dev libxcb-xfixes0-dev libxkbcommon-dev lolcat neofetch nodejs npm pkg-config polybar python3 rofi scrot sxhkd tmux tree xclip zsh -yqq > /dev/null
+sudo apt-get install bspwm btop cmake compton curl dunst feh grc libfontconfig1-dev libfreetype6-dev libxcb-xfixes0-dev libxkbcommon-dev lolcat neofetch nodejs npm pkg-config polybar python3 rofi scrot sxhkd tmux tree xclip wget zsh -yqq > /dev/null
 printf "${Green}Packages Installed${Color_Off}"
 sleep 2
 clear
@@ -58,6 +58,7 @@ chmod u+x nvim.appimage
 ./nvim.appimage --appimage-extract
 sudo mv squashfs-root /
 sudo ln -nsf /squashfs-root/AppRun /usr/bin/nvim
+rm nvim.appimage
 printf "${Green}Neovim Installed${Color_Off}"
 sleep 2
 clear
@@ -112,7 +113,7 @@ clear
 # Setup Fonts
 printf "${Cyan}Installing Fonts${Color_Off}"
 mkdir -p "$HOME/.local/share/fonts"
-curl -s https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.ttf -o "$HOME/.local/share/fonts/Fira Code Regular Nerd Font Complete.ttf"
+wget -q https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.ttf -O "$HOME/.local/share/fonts/Fira Code Regular Nerd Font Complete.ttf"
 fc-cache -f
 
 printf "${Green}Setup Completed. Please re-login for ZSH change to take place${Color_Off}"
