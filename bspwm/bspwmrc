@@ -17,6 +17,9 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 # Setup Monitors
 bspc monitor LVDS-1 -d I II III IV V
 
+# Enable touchpad
+xinput --set-prop pointer:'bcm5974' 'libinput Tapping Enabled' 1
+
 # Configs
 bspc config border_width            0
 bspc config window_gap              5

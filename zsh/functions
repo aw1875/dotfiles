@@ -14,6 +14,12 @@ PromptSetup() {
     zstyle ':vcs_info:*' enable git svn
     zstyle ':vcs_info:git:*' formats " %b%"
 
+    # Handle Virtual ENV
+    virtualenv_info() {
+        [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
+    }
+    export VIRTUAL_ENV_DISABLE_PROMPT=1
+
     precmd() {
         vcs_info
 
@@ -28,6 +34,7 @@ PromptSetup() {
         else
             if [[ "$USER" == "adamwolf" ]]; then
                 PROMPT="%B%{$fg[green]%}[wolfy] ▶ %{$fg[cyan]%}%c%{$reset_color%} "
+                PROMPT+='%{$fg[yellow]%}$(virtualenv_info)%{$reset_color%}%'
             else
                 PROMPT="%B%{$fg[green]%}[%n] ▶ %{$fg[cyan]%}%c%{$reset_color%} "
             fi
