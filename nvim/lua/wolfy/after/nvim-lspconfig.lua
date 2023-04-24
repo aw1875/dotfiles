@@ -21,19 +21,28 @@ end
 -- Setup Mason
 require('mason').setup()
 require('mason-lspconfig').setup({
-    ensure_installed = { 'tsserver', 'quick_lint_js', 'gopls', 'tailwindcss', 'clangd', 'pyright', 'jdtls', 'sumneko_lua',
-        'omnisharp_mono' }
+    ensure_installed = { 'tsserver', 'quick_lint_js', 'gopls', 'tailwindcss', 'clangd', 'pyright', 'jdtls', 'lua_ls',
+        'prismals' }
 })
 local servers = require('mason-lspconfig').get_installed_servers()
 
 -- Add sourcekit to lsp
-nvim_lsp.sourcekit.setup {
+-- nvim_lsp.sourcekit.setup {
+--     on_attach = on_attach,
+--     capabilities = cmp_nvim_lsp.default_capabilities(),
+-- }
+
+local omnisharp_bin = "/home/adamwolf/.cache/omnisharp-vim/omnisharp-roslyn/run"
+
+nvim_lsp['omnisharp'].setup {
+    cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
+    root_dir = nvim_lsp.util.root_pattern("*.csproj", "*.sln"),
     on_attach = on_attach,
     capabilities = cmp_nvim_lsp.default_capabilities(),
 }
 
 for _, server in pairs(servers) do
-    if server == 'sumneko_lua' then
+    if server == 'lua_ls' then
         nvim_lsp[server].setup {
             on_attach = on_attach,
             single_file_support = true,
@@ -44,10 +53,21 @@ for _, server in pairs(servers) do
                 }
             }
         }
-    elseif server == "omnisharp_mono" then
+    elseif server == "clangd" then
         nvim_lsp[server].setup {
-            root_dir = nvim_lsp.util.root_pattern("*.csproj", "*.sln"),
             on_attach = on_attach,
+            single_file_support = true,
+            cmd = { "clangd", "--query-driver", "/usr/bin/g++" },
+            capabilities = cmp_nvim_lsp.default_capabilities(),
+        }
+    elseif server == 'tailwindcss' then
+        nvim_lsp[server].setup {
+            on_attach = function(_, bufnr)
+                on_attach()
+
+                require("tailwindcss-colors").buf_attach(bufnr)
+            end,
+            single_file_support = true,
             capabilities = cmp_nvim_lsp.default_capabilities(),
         }
     else

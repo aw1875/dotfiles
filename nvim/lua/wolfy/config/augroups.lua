@@ -4,7 +4,13 @@
 local Format = vim.api.nvim_create_augroup("Format", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre *", {
 	callback = function()
-		vim.lsp.buf.format()
+		local filetypes = { "js", "jsx", "ts", "tsx", "css" }
+		local current_filetype = vim.fn.expand("%:e")
+		if not vim.tbl_contains(filetypes, current_filetype) then
+			vim.lsp.buf.format()
+		else
+			vim.cmd("Neoformat")
+		end
 	end,
 	group = Format,
 })
