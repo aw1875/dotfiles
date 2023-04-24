@@ -5,7 +5,9 @@ $HOME/.config/polybar/launch.sh &
 $HOME/.config/compton/launch.sh &
 
 # Set BG and Cursor
-feh --bg-fill $HOME/Pictures/Wallpapers/wallhaven-j5v2lm.jpg
+# feh --bg-fill $HOME/Pictures/Wallpapers/wallhaven-yj273d.jpg
+# feh --bg-fill $HOME/Pictures/Wallpapers/wallhaven-j5v2lm.jpg
+feh --bg-fill $HOME/Pictures/Wallpapers/wallpaper2.png
 xsetroot -cursor_name left_ptr &
 
 # Fix Screen Timout
@@ -38,3 +40,7 @@ bspc config gapless_monocle         true
 # Rules
 bspc rule -a Gnome-calculator state=floating center=false
 bspc rule -a themes state=floating center=true
+bspc rule -a wlw state=floating center=true desktop=^2
+bspc rule -a slide-to-text state=floating center=true desktop=^2
+bspc rule -a Windscribe2 state=floating center=false
+bspc rule -a Org.gnome.Nautilus state=floating center=true

@@ -20,24 +20,28 @@ PromptSetup() {
     }
     export VIRTUAL_ENV_DISABLE_PROMPT=1
 
+    # Main Prompt
+    main_prompt() {
+        if [[ "$USER" == "adamwolf" ]]; then
+            PROMPT="%B%{$fg[green]%}[wolfy] ▶ %{$fg[cyan]%}%c%{$reset_color%} "
+            PROMPT+='%{$fg[yellow]%}$(virtualenv_info)%{$reset_color%}%'
+        else
+            PROMPT="%B%{$fg[green]%}[%n] ▶ %{$fg[cyan]%}%c%{$reset_color%} "
+        fi
+    }
+
     precmd() {
         vcs_info
+        main_prompt
 
         if [[ -n ${vcs_info_msg_0_} ]]; then
             STATUS=$(command git status --porcelain 2> /dev/null | tail -n1)
             if [[ -n $STATUS ]]; then
                 RPROMPT="%{$bg[red]%}%{$fg_bold[black]%} ${vcs_info_msg_0_}  %{$reset_color%} "
-
             else
                 RPROMPT="%{$bg[green]%}%{$fg_bold[black]%} ${vcs_info_msg_0_}  %{$reset_color%} "
             fi
         else
-            if [[ "$USER" == "adamwolf" ]]; then
-                PROMPT="%B%{$fg[green]%}[wolfy] ▶ %{$fg[cyan]%}%c%{$reset_color%} "
-                PROMPT+='%{$fg[yellow]%}$(virtualenv_info)%{$reset_color%}%'
-            else
-                PROMPT="%B%{$fg[green]%}[%n] ▶ %{$fg[cyan]%}%c%{$reset_color%} "
-            fi
             RPROMPT=""
         fi
     }
@@ -111,33 +115,33 @@ ec() {
         case $1 in
             *.tar.bz2)
                 FILENAME=$1
-                mkdir -p "${FILENAME%%.*}-extracted" 
-                tar xjf $1 -C "${FILENAME%%.*}-extracted"
+                mkdir -p "${FILENAME%%.*}" 
+                tar xjf $1 -C "${FILENAME%%.*}"
                 ;;
             *.tar.gz)
                 FILENAME=$1
-                mkdir -p "${FILENAME%%.*}-extracted" 
-                tar xzf $1 -C "${FILENAME%%.*}-extracted"
+                mkdir -p "${FILENAME%%.*}" 
+                tar xzf $1 -C "${FILENAME%%.*}"
                 ;;
             *.tar)
                 FILENAME=$1
-                mkdir -p "${FILENAME%%.*}-extracted" 
-                tar xf $1  -C "${FILENAME%%.*}-extracted"
+                mkdir -p "${FILENAME%%.*}" 
+                tar xf $1  -C "${FILENAME%%.*}"
                 ;;
             *.tbz2)
                 FILENAME=$1
-                mkdir -p "${FILENAME%%.*}-extracted" 
-                tar xjf $1 -C "${FILENAME%%.*}-extracted"
+                mkdir -p "${FILENAME%%.*}" 
+                tar xjf $1 -C "${FILENAME%%.*}"
                 ;;
             *.rar)
                 FILENAME=$1
-                mkdir -p "${FILENAME%%.*}-extracted" 
-                unrar x $1 "${FILENAME%%.*}-extracted"
+                mkdir -p "${FILENAME%%.*}" 
+                unrar x $1 "${FILENAME%%.*}"
                 ;;
             *.zip)
                 FILENAME=$1
-                mkdir -p "${FILENAME%%.*}-extracted" 
-                unzip $1 -d "${FILENAME%%.*}-extracted"
+                mkdir -p "${FILENAME%%.*}" 
+                unzip $1 -d "${FILENAME%%.*}"
                 ;;
             *)          printf "\033[31m'$1' cannot be extracted\033[0m\n" ;;
         esac
@@ -163,6 +167,19 @@ mkcmp() {
 
 large() {
     sudo find / -xdev -type f -size +$1 -exec grc ls -Salh --color {} +
+}
+
+ff() {
+
+    if [ -n "$2" ]; then
+        FILE=$(find "$2" | fzf --reverse --preview="cat {}" --preview-window=right:70%:wrap --query="$1")
+    else
+        FILE=$(fzf --preview="cat {}" --preview-window=right:70%:wrap --query="$1")
+    fi
+
+    if [ -n "$FILE" ]; then
+      nvim "$FILE"
+    fi
 }
 
 Bindings() {

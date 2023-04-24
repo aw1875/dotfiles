@@ -1,0 +1,10 @@
+* {
+    background:     #282C34FF;
+    background-alt: #4B4D4FFF;
+    foreground:     #FFFFFFFF;
+    selected:       #98C379FF;
+    active:         #98C379FF;
+    urgent:         #E06C75FF;
+}
+
+/* vim: ft=sass

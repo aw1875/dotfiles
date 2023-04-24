@@ -1,0 +1,5 @@
+* {
+  font: "Menlo 11";
+}
+
+/* vim: ft=sass

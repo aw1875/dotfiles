@@ -71,11 +71,11 @@ font:
     family: FiraCode Nerd Font
 
 shell:
-  program: /usr/bin/zsh
-  args:
-    - -l
-    - -c
-    - "source ~/.zshrc; tmux attach || tmux"
+  # program: /usr/bin/zsh
+  # args:
+  #   - -l
+  #   - -c
+  #   - "source ~/.zshrc; tmux attach || tmux new-session -As Main"
 
 key_bindings:
   - { key: Right, mods: Control, chars: "\eF" }
