@@ -157,16 +157,6 @@ for _, serverName in ipairs(servers) do
                 cmd = { 'clangd', '--query-driver', '/usr/bin/g++' },
                 single_file_support = true,
             })
-            -- elseif serverName == 'tailwindcss' then
-            --     server.setup({
-            --         on_attach = on_attach,
-            --         -- on_attach = function(_, bufnr)
-            --         --     on_attach()
-            --         --     require('tailwindcss-colors').buf_attach(bufnr)
-            --         -- end,
-            --         capabilities = capabilities,
-            --         settings = customSettings[serverName]
-            --     })
         elseif serverName == 'glint' then
             server.setup({
                 on_attach = on_attach,

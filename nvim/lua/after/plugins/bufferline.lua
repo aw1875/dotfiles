@@ -34,10 +34,6 @@ require('bufferline').setup({
                 .. (diag.warning and icons.Warn .. diag.warning or '')
             return vim.trim(ret)
         end,
-        -- diagnostics_indicator = function(count, level, diagnostics_dict, context)
-        --     local icon = level:match('error') and ' ' or ' '
-        --     return ' ' .. icon .. count
-        -- end,
         offsets = {
             {
                 filetype = 'neo-tree',
