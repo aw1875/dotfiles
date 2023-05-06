@@ -1,8 +1,0 @@
-require('wolfy.after.telescope')
-require('wolfy.after.nvim-tree')
-require('wolfy.after.which-key')
--- require('wolfy.after.dashboard-vim')
-require('wolfy.after.nvim-lspconfig')
-require('wolfy.after.nvim-cmp')
-require('wolfy.after.luasnip')
-require('wolfy.after.tests')

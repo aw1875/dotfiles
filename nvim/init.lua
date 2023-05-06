@@ -1,43 +1,53 @@
 -------------------------------------
--- Settings and Bindings
+-- Options and Keymaps
 -------------------------------------
-local sets, _ = pcall(require, 'wolfy.config.sets')
-if not sets then
-    print('Failed to load sets')
-    return
-end
-
-local keybinds, _ = pcall(require, 'wolfy.config.keybinds')
-if not keybinds then
-    print('Failed to load keybinds')
-    return
-end
--------------------------------------
--- Globals
--------------------------------------
-require('wolfy.globals')
+require('config.options')
+require('config.keymaps')
 
 -------------------------------------
--- Extra Functions
+-- Autogroups
 -------------------------------------
-require('wolfy.extra')
+require('config.autocmds')
+
+-------------------------------------
+-- Lazy
+-------------------------------------
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system {
+        'git',
+        'clone',
+        '--filter=blob:none',
+        'https://github.com/folke/lazy.nvim.git',
+        '--branch=stable',
+        lazypath,
+    }
+end
+vim.opt.rtp:prepend(lazypath)
+
+require('lazy').setup({
+    spec = {
+        { import = 'plugins' },
+    },
+    defaults = {
+        lazy = false,
+        version = false,
+    },
+    checker = { enabled = true },
+    performance = {
+        rtp = {
+            disabled_plugins = {
+                'gzip',
+                'tarPlugin',
+                'tohtml',
+                'tutor',
+                'zipPlugin',
+            },
+        },
+    },
+})
 
 -------------------------------------
 -- Plugins
 -------------------------------------
-require('wolfy.plugins')
-
--------------------------------------
--- Set Color Scheme
--------------------------------------
-require('wolfy.config.colorscheme')
-
--------------------------------------
--- Load Plugins After Setup
--------------------------------------
-require('wolfy.after')
-
--------------------------------------
--- Load AutoGroups
--------------------------------------
-require('wolfy.config.augroups')
+require('after.plugins')
