@@ -44,7 +44,7 @@ return {
     'tpope/vim-fugitive',
     'tpope/vim-rhubarb',
     {
-        'lewis6991/gitsigns.nvim',
+        'aw1875/gitsigns.nvim',
         event = { 'BufReadPre', 'BufNewFile' },
         opts = {
             signs = {
@@ -55,11 +55,16 @@ return {
                 changedelete = { text = '▎' },
                 untracked = { text = '▎' },
             },
+            attach_to_untracked = true,
+            current_line_blame = true,
+            current_line_blame_opts = {
+                virt_text = true,
+                virt_text_pos = 'eol',
+                delay = 0,
+                ignore_whitespace = true,
+            },
         },
     },
-
-    -- Emmet
-    'mattn/emmet-vim',
 
     -- Auto Pairs
     {

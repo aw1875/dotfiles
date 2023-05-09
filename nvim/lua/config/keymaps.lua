@@ -40,6 +40,12 @@ map('n', '<leader>nf', '<cmd>Neotree focus<CR>')
 
 -- Git
 map('n', '<leader>gs', vim.cmd.Git)
+map('n', '<leader>gb', function()
+    require('gitsigns').blame_line { full = true }
+end)
+
+-- TestCases Bindings
+map('n', '<leader>tc', ':Tests<CR>')
 
 return {
     map = map,

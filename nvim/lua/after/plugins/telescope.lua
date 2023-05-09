@@ -6,6 +6,7 @@ local builtin = require('telescope.builtin')
 -- Setup Telescope
 telescope.setup({
     defaults = {
+        layout_strategy = 'flex',
         mappings = {
             n = {
                 ['q'] = actions.close
@@ -51,6 +52,5 @@ map('n', '<leader>fg', builtin.live_grep, {})
 map('n', '<leader>fb', buffers, {})
 map('n', '<leader>fh', help, {})
 map('n', '<leader>fd', dotfiles, {})
-map('n', '<leader>fi', telescope.extensions.media_files.media_files, {})
 map('n', '<leader>dl', builtin.diagnostics, { buffer = 0 })
-map('n', '<leader>sr', builtin.lsp_references, { buffer = 0 })
+map('n', '<leader>sr', builtin.lsp_references, {})
