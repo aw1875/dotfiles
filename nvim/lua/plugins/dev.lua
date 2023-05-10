@@ -1,7 +1,7 @@
 return {
     {
         'aw1875/tests.nvim',
-        config = {
+        opts = {
             timeout = 3000
         }
     },

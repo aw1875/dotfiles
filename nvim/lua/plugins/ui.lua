@@ -45,7 +45,10 @@ return {
         end,
         config = function(_, opts)
             require('mini.indentscope').setup(opts)
-            vim.cmd [[highlight MiniIndentscopeSymbol guifg=#61afef gui=nocombine]]
+            vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', {
+                fg = '#61afef',
+                nocombine = true,
+            })
         end,
     },
 }

@@ -10,11 +10,11 @@ local lspkind = require('lspkind')
 -- Setup lspkind
 lspkind.init({
     symbol_map = {
-        Copilot = "",
+        Copilot = '',
     },
 })
 
-vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+vim.api.nvim_set_hl(0, 'CmpItemKindCopilot', { fg = '#6CC644' })
 
 cmp.setup({
     snippet = {
@@ -60,7 +60,7 @@ cmp.setup({
             name = 'buffer',
             keyword_length = 5
         },
-        { name = "copilot", group_index = 2 },
+        { name = 'copilot', group_index = 2 },
     }),
     formatting = {
         fields = { 'menu', 'abbr', 'kind' },
@@ -71,7 +71,7 @@ cmp.setup({
                     mode = 'symbol_text',
                     maxwidth = 50,
                     preset = 'codicons',
-                    symbol_map = { Copilot = "" },
+                    symbol_map = { Copilot = '' },
                     before = require('tailwindcss-colorizer-cmp').formatter
                 })
 

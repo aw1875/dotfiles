@@ -5,9 +5,7 @@ return {
         dependencies = {
             {
                 'williamboman/mason.nvim',
-                run = function()
-                    pcall(vim.cmd, 'MasonUpdate')
-                end,
+                build = ':MasonUpdate',
                 config = true
             },
             { 'williamboman/mason-lspconfig.nvim' },

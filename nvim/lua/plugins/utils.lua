@@ -19,7 +19,7 @@ return {
             'nvim-tree/nvim-web-devicons',
             'MunifTanjim/nui.nvim',
         },
-        config = {
+        opts = {
             filesystem = {
                 follow_current_file = true,
                 hijack_netrw_behavior = 'open_current',
@@ -142,6 +142,7 @@ return {
                 bottom_search = true,
                 command_palette = true,
                 long_message_to_split = true,
+                lsp_doc_border = true
             },
         },
     },
@@ -150,7 +151,10 @@ return {
     {
         'mbbill/undotree',
         config = function()
-            require('utils').map('n', '<leader>u', vim.cmd.UndotreeToggle, { silent = true })
+            require('utils').map('n', '<leader>u', function()
+                vim.cmd.UndotreeToggle()
+                vim.cmd.UndotreeFocus()
+            end, { silent = true })
         end
     },
 
