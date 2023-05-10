@@ -2,11 +2,31 @@
 -- LSP Auto Formatting
 -------------------------------------
 local Format = vim.api.nvim_create_augroup('Format', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePre *', {
+vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+    pattern = '*',
     callback = function()
-        local filetypes = { 'js', 'jsx', 'ts', 'tsx', 'css' }
-        local current_filetype = vim.fn.expand('%:e')
-        if not vim.tbl_contains(filetypes, current_filetype) then
+        -- Allowed Neofomat filetypes
+        local filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' }
+
+        -- Get current filetype
+        local ft = vim.bo.filetype
+
+        -- If filetype is not allowed for neofomat, format with lsp
+        if not vim.tbl_contains(filetypes, ft) then
+            vim.lsp.buf.format()
+            return
+        end
+
+        -- Search for pretter config file
+        local prettier = vim.fs.find({ '.prettierrc', 'prettier.config.js' }, {
+            limit = 1,
+            upwards = true,
+            type = 'file',
+            stop = vim.loop.os_homedir(),
+        })
+
+        -- If prettier config file is found, format with prettier
+        if #prettier == 0 or prettier[1]:match('node_modules') then
             vim.lsp.buf.format()
         else
             vim.cmd('Neoformat')
@@ -19,19 +39,23 @@ vim.api.nvim_create_autocmd('BufWritePre *', {
 -- TMUX Window Formatting
 -------------------------------------
 local TMUX = vim.api.nvim_create_augroup('TMUX', { clear = true })
-vim.api.nvim_create_autocmd('BufEnter,BufReadPost,FileReadPost,BufNewFile *', {
-    callback = function()
-        local process = io.popen('tmux display-message -p \'#S\'')
-        if (process ~= nil) then
-            process = io.popen('tmux display-message -p \'#W\'')
-            os.execute('tmux rename-window ' .. (vim.fn.expand('%:t') ~= '' and vim.fn.expand('%:t') or 'neovim'))
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufNewFile', 'VimLeave' }, {
+    pattern = '*',
+    callback = function(ev)
+        -- On exit reset name back to zsh
+        if ev.event == 'VimLeave' then
+            os.execute('tmux rename-window zsh')
+            return
         end
-    end,
-    group = TMUX,
-})
-vim.api.nvim_create_autocmd('ExitPre *', {
-    callback = function()
-        os.execute('tmux rename-window zsh')
+
+        -- Extendable ignored filetypes
+        local ignored_filetypes = { '', 'TelescopePrompt', 'neo-tree' }
+
+        -- If filetype is not ignored, rename tmux window to current file
+        if vim.bo.filetype ~= nil and not vim.tbl_contains(ignored_filetypes, vim.bo.filetype) then
+            local file = vim.fn.expand("%:t")
+            os.execute('tmux rename-window ' .. (file ~= '' and file or 'neovim'))
+        end
     end,
     group = TMUX,
 })

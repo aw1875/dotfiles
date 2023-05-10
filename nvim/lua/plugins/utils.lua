@@ -36,7 +36,7 @@ return {
     {
         'sbdchd/neoformat',
         config = function()
-            vim.api.nvim_set_var('neoformat_try_node_exe', 1)
+            vim.g.neoformat_try_node_exe = 1
         end
     },
 
@@ -48,12 +48,12 @@ return {
         event = { 'BufReadPre', 'BufNewFile' },
         opts = {
             signs = {
-                add = { text = '▎' },
-                change = { text = '▎' },
-                delete = { text = '▎' },
-                topdelete = { text = '▎' },
+                add          = { text = '▎' },
+                change       = { text = '▎' },
+                delete       = { text = '▎' },
+                topdelete    = { text = '▎' },
                 changedelete = { text = '▎' },
-                untracked = { text = '▎' },
+                untracked    = { text = '▎' },
             },
             attach_to_untracked = false,
             current_line_blame = true,
