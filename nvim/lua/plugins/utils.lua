@@ -44,18 +44,18 @@ return {
     'tpope/vim-fugitive',
     'tpope/vim-rhubarb',
     {
-        'aw1875/gitsigns.nvim',
+        'lewis6991/gitsigns.nvim',
         event = { 'BufReadPre', 'BufNewFile' },
         opts = {
             signs = {
                 add = { text = '▎' },
                 change = { text = '▎' },
-                delete = { text = '' },
-                topdelete = { text = '' },
+                delete = { text = '▎' },
+                topdelete = { text = '▎' },
                 changedelete = { text = '▎' },
                 untracked = { text = '▎' },
             },
-            attach_to_untracked = true,
+            attach_to_untracked = false,
             current_line_blame = true,
             current_line_blame_opts = {
                 virt_text = true,
@@ -63,6 +63,8 @@ return {
                 delay = 0,
                 ignore_whitespace = true,
             },
+            current_line_blame_formatter = '<author>, <author_time:%R> • <summary>',
+            current_line_blame_formatter_nc = 'You, <author_time:%R> • Uncommitted changes'
         },
     },
 
