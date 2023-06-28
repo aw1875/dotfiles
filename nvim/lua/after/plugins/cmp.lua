@@ -6,15 +6,9 @@ end
 
 local luasnip = require('luasnip')
 local lspkind = require('lspkind')
+local icons = require('config.init').icons
 
--- Setup lspkind
-lspkind.init({
-    symbol_map = {
-        Copilot = '',
-    },
-})
-
-vim.api.nvim_set_hl(0, 'CmpItemKindCopilot', { fg = '#6CC644' })
+vim.api.nvim_set_hl(0, 'CmpItemKindCopilot', { fg = '#98c379' })
 
 cmp.setup({
     snippet = {
@@ -70,8 +64,7 @@ cmp.setup({
                 local format = lspkind.cmp_format({
                     mode = 'symbol_text',
                     maxwidth = 50,
-                    preset = 'codicons',
-                    symbol_map = { Copilot = '' },
+                    symbol_map = icons.kinds,
                     before = require('tailwindcss-colorizer-cmp').formatter
                 })
 
@@ -83,7 +76,7 @@ cmp.setup({
 
             -- Set vim_item fields
             if #strings == 1 then
-                vim_item.menu = '󰏘'
+                vim_item.menu = icons.kinds.Color
                 vim_item.kind = strings[1]
             else
                 vim_item.menu = strings[1]

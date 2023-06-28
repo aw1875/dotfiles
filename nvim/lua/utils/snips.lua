@@ -59,21 +59,32 @@ ls.add_snippets('lua', {
         i(0),
         rep(1)
     })),
+    s('exm', fmt([[
+    local M = {{}}
+
+    function M.{}({})
+        {}
+    end
+
+    return M
+    ]], {
+        i(1),
+        i(2),
+        i(0),
+    })),
 })
 
 ls.add_snippets('typescriptreact', {
     s('tcc', fmt([[
     'use client';
 
-    import React from 'react'
-
-    type {}Props = {{
+    interface {}Props {{
         {}
     }}
 
     const {}: React.FC<{}Props> = ({{ {} }}) => {{
         return (
-            <div>Hello World</div>
+            <div>{}</div>
         );
     }}
 
@@ -86,10 +97,13 @@ ls.add_snippets('typescriptreact', {
             local lines = {}
             for _, line in ipairs(args[1]) do
                 local parts = vim.split(line, ':', { trimempty = true })
-                lines[#lines + 1] = parts[1]:gsub('%s+', ''):gsub(';', '')
+                if #parts ~= 0 then
+                    lines[#lines + 1] = parts[1]:gsub('%s+', ''):gsub('?', ''):gsub(';', '')
+                end
             end
             return table.concat(lines, ', ')
         end, { 2 }),
+        i(3),
         rep(1)
     })),
 })

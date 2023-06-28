@@ -47,4 +47,3 @@ opt.redrawtime = 10000
 opt.formatoptions:remove('cro')
 opt.foldmethod = 'manual'
 opt.clipboard:append('unnamedplus')
-opt.laststatus = 3

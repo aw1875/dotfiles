@@ -32,9 +32,11 @@ alias gd="git diff"
 alias gs="git status"
 alias gp="git push"
 alias ga="git add"
-alias gcm="git commit -m"
-alias gwa="git worktree add"
+alias gl="git log"
+alias gcm="~/.dotfiles/zsh/gcm"
+alias gwa=worktree_add
 alias gwr="git worktree remove"
+alias gwl="git worktree list"
 
 # -----------------------------------
 # Python Aliases

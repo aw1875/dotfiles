@@ -24,15 +24,22 @@ PromptSetup() {
     main_prompt() {
         if [[ "$USER" == "adamwolf" ]]; then
             PROMPT="%B%{$fg[green]%}[wolfy] ▶ %{$fg[cyan]%}%c%{$reset_color%} "
-            PROMPT+='%{$fg[yellow]%}$(virtualenv_info)%{$reset_color%}%'
+            PROMPT+="%{$fg[yellow]%}$(virtualenv_info)%{$reset_color%}"
         else
             PROMPT="%B%{$fg[green]%}[%n] ▶ %{$fg[cyan]%}%c%{$reset_color%} "
         fi
     }
 
     precmd() {
-        vcs_info
         main_prompt
+        
+        if [ "$(git rev-parse --is-bare-repository 2>/dev/null)" = "true" ]; then
+            WORK_TREES=$(( $(git worktree list | wc -l) - 1 ))
+            RPROMPT="%{$bg[yellow]%}%{$fg_bold[black]%}  ${WORK_TREES} %{$reset_color%} "
+            return
+        fi
+
+        vcs_info
 
         if [[ -n ${vcs_info_msg_0_} ]]; then
             STATUS=$(command git status --porcelain 2> /dev/null | tail -n1)
@@ -170,16 +177,18 @@ large() {
 }
 
 ff() {
+    fdfind --type f --hidden --exclude .git | \
+    fzf-tmux -p --preview="cat {}" --preview-window=right:40%:wrap --exit-0 \
+    --color=dark \
+    --color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:#4b5263,hl+:#98c379 \
+    --color=info:#98c379,prompt:#61afef,pointer:#e5c07b,marker:#e5c07b,spinner:#61afef,header:#61afef | \
+    xargs -r nvim
+}
 
-    if [ -n "$2" ]; then
-        FILE=$(find "$2" | fzf --reverse --preview="cat {}" --preview-window=right:70%:wrap --query="$1")
-    else
-        FILE=$(fzf --preview="cat {}" --preview-window=right:70%:wrap --query="$1")
-    fi
-
-    if [ -n "$FILE" ]; then
-      nvim "$FILE"
-    fi
+worktree_add() {
+    git worktree add $1
+    cp ../.env.local $1/.env
+    cp ../deploy.js $1/deploy.js
 }
 
 Bindings() {

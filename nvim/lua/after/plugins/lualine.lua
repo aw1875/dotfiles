@@ -32,6 +32,27 @@ require('lualine').setup({
                     hint = icons.diagnostics.Hint,
                 },
             },
+            {
+                function()
+                    local recording = vim.fn.reg_recording()
+                    local executing = vim.fn.reg_executing()
+
+                    if recording ~= '' then
+                        return 'Recording @' .. recording
+                    elseif executing ~= '' then
+                        return ' @' .. executing
+                    else
+                        return ""
+                    end
+                end,
+                color = function ()
+                    if vim.fn.reg_recording() ~= '' then
+                        return { fg = '#e06c75' }
+                    elseif vim.fn.reg_executing() ~= '' then
+                        return { fg = '#98c379' }
+                    end
+                end
+            },
             { 'filename', path = 1, symbols = { modified = '', readonly = '', unnamed = '[No Name]' } },
         },
         lualine_x = {
@@ -48,7 +69,17 @@ require('lualine').setup({
                     local ok, clients = pcall(vim.lsp.get_active_clients, { name = 'copilot', bufnr = 0 })
                     return ok and #clients > 0
                 end,
-                color = { fg = '#98c379' }
+                color = function()
+                    local status = require("copilot.api").status.data
+
+                    if status.status == 'InProgress' then
+                        return { fg = '#56b6c2' }
+                    elseif status.status == 'Warning' then
+                        return { fg = '#d19a66' }
+                    else
+                        return { fg = '#98c379' }
+                    end
+                end
             },
             {
                 'fileformat',

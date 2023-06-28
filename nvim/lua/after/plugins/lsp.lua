@@ -14,6 +14,7 @@ local on_attach = function()
     map('n', 'gd', vim.lsp.buf.definition, { buffer = 0 })
     map('n', 'gT', vim.lsp.buf.type_definition, { buffer = 0 })
     map('n', 'gi', vim.lsp.buf.implementation, { buffer = 0 })
+    map('n', 'gr', '<cmd>TroubleToggle lsp_references<cr>', { buffer = 0 })
     map('n', '<leader>dn', vim.diagnostic.goto_next, { buffer = 0 })
     map('n', '<leader>dp', vim.diagnostic.goto_prev, { buffer = 0 })
     map('n', '<leader>rn', vim.lsp.buf.rename, { buffer = 0 })
@@ -119,6 +120,7 @@ local servers = {
     'clangd',
     'jdtls',
     'jsonls',
+    'rust_analyzer',
 
     -- Frameworks
     'ember',
@@ -127,6 +129,7 @@ local servers = {
     -- Tools
     'tailwindcss',
     'prismals',
+    'ansiblels',
 }
 
 -- Setup Mason
