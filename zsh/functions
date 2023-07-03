@@ -177,7 +177,8 @@ large() {
 }
 
 ff() {
-    fdfind --type f --hidden --exclude .git | \
+    # fdfind --type f --hidden --exclude .git | \
+    fd --type f --hidden --exclude .git | \
     fzf-tmux -p --preview="cat {}" --preview-window=right:40%:wrap --exit-0 \
     --color=dark \
     --color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:#4b5263,hl+:#98c379 \
@@ -187,8 +188,8 @@ ff() {
 
 worktree_add() {
     git worktree add $1
-    cp ../.env.local $1/.env
-    cp ../deploy.js $1/deploy.js
+    # cp ../.env.local $1/.env
+    # cp ../deploy.js $1/deploy.js
 }
 
 Bindings() {

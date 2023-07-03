@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 
 # credits to https://github.com/kahkhang/Inquirer.sh
 
@@ -431,6 +431,7 @@ declare -A typeMap=(
   ["Revert"]="revert:"
 )
 message_types=(
+'Custom: Custom commit message'
 'Feature: New feature implementations or additions to existing functionality'
 'Bugfix: Bug fixes or resolving in the code'
 'Chore: General maintenance tasks and simple changes'
@@ -449,4 +450,8 @@ type=${message_type%%:*}
 
 text_input "Commit Message:" message
 
-git commit -m "${typeMap[$type]} $message"
+if [ "$type" != "Custom" ]; then
+    git commit -m "${typeMap[$type]} $message"
+else
+    git commit -m "$message"
+fi

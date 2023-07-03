@@ -104,6 +104,21 @@ local customSettings = {
                 unknownAtRules = 'ignore'
             },
         },
+    },
+    omnisharp = {
+        cmd = { "dotnet", "/Users/adamwolf/.local/share/nvim/mason/packages/omnisharp/libexec/OmniSharp.dll" },
+        enable_editorconfig_support = true,
+        enable_ms_build_load_projects_on_demand = true,
+
+        -- Enables support for roslyn analyzers, code fixes and rulesets.
+        enable_roslyn_analyzers = true,
+        organize_imports_on_format = false,
+        enable_import_completion = true,
+        sdk_include_prereleases = true,
+
+        -- Only run analyzers against open files when 'enableRoslynAnalyzers' is
+        -- true
+        analyze_open_documents_only = false,
     }
 }
 
@@ -116,11 +131,12 @@ local servers = {
     -- 'quick_lint_js',
     'bashls',
     'pyright',
-    'gopls',
+    -- 'gopls',
     'clangd',
     'jdtls',
     'jsonls',
     'rust_analyzer',
+    'omnisharp',
 
     -- Frameworks
     'ember',
@@ -166,6 +182,15 @@ for _, serverName in ipairs(servers) do
                 capabilities = capabilities,
                 settings = customSettings[serverName],
                 -- root_dir = utils.is_glint_project,
+            })
+        elseif serverName == 'omnisharp' then
+            server.setup({
+                on_attach = function(client)
+                    client.server_capabilities.semanticTokensProvider = nil
+                    on_attach()
+                end,
+                capabilities = capabilities,
+                settings = customSettings[serverName],
             })
         else
             server.setup({
