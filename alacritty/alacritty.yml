@@ -80,7 +80,7 @@ shell:
   args:
     - -l
     - -c
-    - "source ~/.zshrc; tmux attach || tmux new-session -As Main"
+    - "source ~/.zshrc; tmux attach || tmux new-session -As Travefy"
 
 key_bindings:
   - { key: Right, mods: Control, chars: "\eF" }
