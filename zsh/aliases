@@ -27,12 +27,15 @@ alias :q="exit"
 # -----------------------------------
 # Git Aliases
 # -----------------------------------
-alias gc="git checkout"
+alias gco="git checkout"
 alias gd="git diff"
 alias gs="git status"
 alias gp="git push"
+alias gpu="git pull"
 alias ga="git add"
 alias gl="git log"
+alias glo="git log --pretty=format:'%Cred%h %Creset-%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
+alias gc="git commit"
 alias gcm="~/.dotfiles/zsh/gcm"
 alias gwa=worktree_add
 alias gwr="git worktree remove"

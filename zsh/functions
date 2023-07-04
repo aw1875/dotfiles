@@ -188,8 +188,6 @@ ff() {
 
 worktree_add() {
     git worktree add $1
-    # cp ../.env.local $1/.env
-    # cp ../deploy.js $1/deploy.js
 }
 
 Bindings() {
