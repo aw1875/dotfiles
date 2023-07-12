@@ -9,3 +9,6 @@ plugged
 # ZSH
 zsh/private
 zsh/plugins
+
+# TMUX Plugins
+tmux/plugins/*
