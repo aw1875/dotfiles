@@ -137,6 +137,7 @@ local servers = {
     'jsonls',
     'rust_analyzer',
     'omnisharp',
+    'kotlin_language_server',
 
     -- Frameworks
     'ember',
@@ -191,6 +192,13 @@ for _, serverName in ipairs(servers) do
                 end,
                 capabilities = capabilities,
                 settings = customSettings[serverName],
+            })
+        elseif serverName == 'kotlin_language_server' then
+            server.setup({
+                on_attach = on_attach,
+                capabilities = capabilities,
+                root_dir = lsp.util.root_pattern('settings.gradle.*'),
+                single_file_support = true,
             })
         else
             server.setup({

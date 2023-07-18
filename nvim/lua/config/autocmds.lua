@@ -36,28 +36,3 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
     end,
     group = Format,
 })
-
--------------------------------------
--- TMUX Window Formatting
--------------------------------------
-local TMUX = vim.api.nvim_create_augroup('TMUX', { clear = true })
-vim.api.nvim_create_autocmd({ 'BufEnter', 'BufNewFile', 'VimLeave' }, {
-    pattern = '*',
-    callback = function(ev)
-        -- On exit reset name back to zsh
-        if ev.event == 'VimLeave' then
-            os.execute('tmux rename-window zsh')
-            return
-        end
-
-        -- Extendable ignored filetypes
-        local ignored_filetypes = { '', 'TelescopePrompt', 'neo-tree' }
-
-        -- If filetype is not ignored, rename tmux window to current file
-        if vim.bo.filetype ~= nil and not vim.tbl_contains(ignored_filetypes, vim.bo.filetype) then
-            local file = vim.fn.expand("%:t")
-            os.execute('tmux rename-window ' .. (file ~= '' and file or 'neovim'))
-        end
-    end,
-    group = TMUX,
-})
