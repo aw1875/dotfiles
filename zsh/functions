@@ -188,6 +188,13 @@ ff() {
 
 worktree_add() {
     git worktree add $1
+
+    # If in travefy repo, add host to devcontainer .env
+    if [[ $PWD == *"travefy.git"* ]]; then
+        echo "HOST_OS=$OSTYPE" > "$1/.devcontainer/.env"
+    fi
+
+    cd $1
 }
 
 Bindings() {
