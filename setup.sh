@@ -28,4 +28,4 @@ mkdir -p "$HOME/.local/share/fonts"
 wget -q https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.ttf -O "$HOME/.local/share/fonts/Fira Code Regular Nerd Font Complete.ttf"
 fc-cache -f
 
-printf "${Green}Done!${Color_Off}
+printf "${Green}Done!${Color_Off}"
