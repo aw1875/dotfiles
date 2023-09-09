@@ -47,6 +47,15 @@ end)
 -- TestCases Bindings
 map('n', '<leader>tc', ':Tests<CR>')
 
+-- Dev
+map('n', '<leader>rl', function()
+    package.loaded.devcontainers = nil
+    require('devcontainers').setup()
+end)
+
+-- TSPlayground
+map('n', '<leader>tsp', '<cmd>InspectTree<CR>')
+
 return {
     map = map,
 }

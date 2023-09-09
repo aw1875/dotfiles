@@ -1,5 +1,5 @@
 local ls = require('luasnip')
-local s, i, f = ls.snippet, ls.insert_node, ls.function_node
+local s, i, f, c = ls.snippet, ls.insert_node, ls.function_node, ls.choice_node
 
 local fmt = require('luasnip.extras.fmt').fmt
 local rep = require('luasnip.extras').rep
@@ -23,7 +23,7 @@ ls.add_snippets('lua', {
         i(0),
     })),
     s('mf', fmt([[
-    function M.{}({})
+    M.{} = function({})
         {}
     end
     ]], {
@@ -62,7 +62,7 @@ ls.add_snippets('lua', {
     s('exm', fmt([[
     local M = {{}}
 
-    function M.{}({})
+    M.{} = function({})
         {}
     end
 
@@ -106,4 +106,73 @@ ls.add_snippets('typescriptreact', {
         i(3),
         rep(1)
     })),
+})
+
+ls.add_snippets('zig', {
+    s({ trig = "str", name = "Struct", dscr = "struct helper" }, fmt([[
+        pub const <> = struct {
+            <>
+
+            pub fn init(<>) <> {
+                return .{
+                    <>
+                };
+            }<>
+        };<>
+        ]], {
+            i(1),
+            i(2),
+            f(function(args)
+                local lines = {}
+                for _, line in ipairs(args[1]) do
+                    if not (line:match("^(//+)/(.+)") or line:match("^%s*$")) then
+                        lines[#lines + 1] = line:gsub('^%s+', ''):gsub(',', '')
+                    end
+                end
+                return table.concat(lines, ', ')
+            end, { 2 }),
+            rep(1),
+            f(function(args)
+                local lines = {}
+                for _, line in ipairs(args[1]) do
+                    if not (line:match("^//+") or line:match("^%s*$")) then
+                        local parts = vim.split(line, ':', { trimempty = true })
+                        if #parts > 0 then
+                            local var = parts[1]:match("^%s*(.-)%s*$"):gsub(',', '')
+                            lines[#lines + 1] = "." .. var .. " = " .. var
+                        end
+                    end
+                end
+                return table.concat(lines, ', ') .. ','
+            end, { 2 }),
+            i(3),
+            i(0),
+        }, {
+            delimiters = "<>"
+        }),
+        fmt([[
+        pub const <> = struct {
+            <>
+
+            pub fn init(<>) <> {
+                <>
+            }<>
+        };<>
+        ]], {
+            i(1, "MyStruct"),
+            i(2),
+            f(function(args)
+                local lines = {}
+                for _, line in ipairs(args[1]) do
+                    lines[#lines + 1] = line:gsub('^%s+', ''):gsub(',', '')
+                end
+                return table.concat(lines, ', ')
+            end, { 2 }),
+            rep(1),
+            i(3),
+            i(4),
+            i(0),
+        }, {
+            delimiters = "<>"
+        })),
 })

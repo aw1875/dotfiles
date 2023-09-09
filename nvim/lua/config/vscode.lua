@@ -1,24 +1,4 @@
 -------------------------------------
--- Options and Keymaps
--------------------------------------
-require('config.options')
-require('config.keymaps')
-
--------------------------------------
--- VSCode Compatibility
--------------------------------------
-if vim.g.vscode then
-    vim.notify("Running in VSCode")
-    require('config.vscode')
-    return
-end
-
--------------------------------------
--- Autogroups
--------------------------------------
-require('config.autocmds')
-
--------------------------------------
 -- Lazy
 -------------------------------------
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -36,7 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
     spec = {
-        { import = 'plugins' },
+        { import = 'vscode' },
     },
     defaults = {
         lazy = false,
@@ -55,8 +35,3 @@ require('lazy').setup({
         },
     },
 })
-
--------------------------------------
--- Plugins
--------------------------------------
-require('after.plugins')

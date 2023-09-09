@@ -5,6 +5,13 @@ local Format = vim.api.nvim_create_augroup('Format', { clear = true })
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
     pattern = '*',
     callback = function()
+        -- Check it travefy is in the path of current file
+        local path = vim.fn.expand('%:p')
+        if path:match('Travefy') then
+            vim.notify('Formatting disabled for Travefy workspaces', vim.log.levels.INFO, { title = 'neovim' })
+            return
+        end
+
         -- Disabled filetypes
         local filetypes = { 'prisma' }
 

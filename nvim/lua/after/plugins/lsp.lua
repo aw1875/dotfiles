@@ -104,6 +104,18 @@ local customSettings = {
                 unknownAtRules = 'ignore'
             },
         },
+    },
+    omnisharp = {
+        cmd = { 'dotnet', '/home/adamwolf/.local/share/nvim/mason/packages/omnisharp/libexec/OmniSharp.dll' },
+        enable_editorconfig_support = true,
+        enable_ms_build_load_projects_on_demand = true,
+
+        enable_rosyln_analyzers = true,
+        organize_imports_timeout = false,
+        enable_import_completion = true,
+        sdk_include_previews = true,
+
+        analyze_open_documents_only = false,
     }
 }
 
@@ -121,6 +133,8 @@ local servers = {
     'jdtls',
     'jsonls',
     'rust_analyzer',
+    'omnisharp',
+    'zls',
 
     -- Frameworks
     'ember',
@@ -130,6 +144,7 @@ local servers = {
     'tailwindcss',
     'prismals',
     'ansiblels',
+    'dockerls',
 }
 
 -- Setup Mason
@@ -166,6 +181,21 @@ for _, serverName in ipairs(servers) do
                 capabilities = capabilities,
                 settings = customSettings[serverName],
                 -- root_dir = utils.is_glint_project,
+            })
+        elseif serverName == 'omnisharp' then
+            server.setup({
+                on_attach = function(client)
+                    client.server_capabilities.semanticTokensProvider = nil
+                    on_attach()
+                end,
+                capabilities = capabilities,
+                settings = customSettings[serverName],
+            })
+        elseif serverName == 'zls' then
+            server.setup({
+                cmd = { '/home/adamwolf/.zls/bin/zls' },
+                on_attach = on_attach,
+                capabilities = capabilities,
             })
         else
             server.setup({

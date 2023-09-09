@@ -9,7 +9,23 @@ require('lualine').setup({
         component_separators = { left = '│', right = '│' },
     },
     sections = {
-        lualine_a = { 'mode' },
+        lualine_a = {
+            {
+                function()
+                    if vim.g.devcontainer_name then
+                        return vim.g.devcontainer_name
+                    else
+                        return ""
+                    end
+                end,
+                color = function()
+                    if vim.g.devcontainer_name then
+                        return { bg = '#56b6c2', fg = '#282c34' }
+                    end
+                end
+            },
+            'mode'
+        },
         lualine_b = {
             { 'branch', icon = { '' } },
             {
@@ -45,7 +61,7 @@ require('lualine').setup({
                         return ""
                     end
                 end,
-                color = function ()
+                color = function()
                     if vim.fn.reg_recording() ~= '' then
                         return { fg = '#e06c75' }
                     elseif vim.fn.reg_executing() ~= '' then
