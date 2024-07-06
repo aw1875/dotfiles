@@ -1,11 +1,9 @@
-.DS_Store
-*.backup
-plugged
-*.token
-*BACKUP
-*.bak
-*.luarc.json
+private
 
-# ZSH
-zsh/private
-zsh/plugins
+expressvpn
+express-vpn.sh
+
+after
+*.luarc.json
+*.dev.lua
+dev.lua

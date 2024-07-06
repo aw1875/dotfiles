@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+session=$(tmux list-sessions | cut -d ':' -f1 | sort | fzf)
+[[ -z "$session" ]] && exit 0
+
+tmux switch -t "$session"

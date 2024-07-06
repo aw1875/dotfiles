@@ -1,0 +1,241 @@
+# -----------------------------------
+# Source Plugins
+# -----------------------------------
+Plugin() {
+    source ~/.zsh/plugins/$1
+}
+
+# -----------------------------------
+# Colors
+# -----------------------------------
+SetupColors() {
+    autoload -U colors && colors
+    autoload -Uz vcs_info
+
+    zstyle ':vcs_info:*' enable git svn
+    zstyle ':vcs_info:git:*' formats " %b%"
+    zstyle ':completion:*' menu select
+    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS} "ma=48;2;86;182;194;38;2;40;44;52"
+}
+
+# -----------------------------------
+# Bindings
+# -----------------------------------
+SetupBindings() {
+    autoload edit-command-line; zle -N edit-command-line
+    bindkey '^e' edit-command-line
+    
+    autoload -U compinit; compinit
+    bindkey '^[[Z' reverse-menu-complete
+    
+    bindkey -v
+    bindkey '^R' history-incremental-search-backward
+
+    zle -N fgg
+    bindkey '^Z' fgg
+}
+
+# -----------------------------------
+# History
+# -----------------------------------
+SetupHistory() {
+    HISTFILE=~/.cache/zsh/history
+    HISTSIZE=10000
+    SAVEHIST=10000
+    HISTTIMEFORMAT="[%F %T] "
+    [[ ! -f $HISTFILE ]] && mkdir -p $(dirname $HISTFILE) && touch $HISTFILE
+
+    setopt EXTENDED_HISTORY
+    setopt SHARE_HISTORY
+}
+
+# -----------------------------------
+# Prompt precmd
+# -----------------------------------
+precmd() {
+    # Git
+    if [ "$(git rev-parse --is-bare-repository 2>/dev/null)" = "true" ]; then
+        WORK_TREES=$(( $(git worktree list | wc -l) - 1 ))
+        RPROMPT="%{$bg[yellow]%}%{$fg_bold[black]%}  ${WORK_TREES} %{$reset_color%} "
+        return
+    fi
+    
+    vcs_info 
+    if [[ -n ${vcs_info_msg_0_} ]]; then
+        STATUS=$(command git status --porcelain 2> /dev/null | tail -n1)
+        if [[ -n $STATUS ]]; then
+    	RPROMPT="%{$bg[red]%}%{$fg_bold[black]%} ${vcs_info_msg_0_}  %{$reset_color%} "
+        else
+    	RPROMPT="%{$bg[green]%}%{$fg_bold[black]%} ${vcs_info_msg_0_}  %{$reset_color%} "
+        fi
+    else
+        RPROMPT=""
+    fi
+
+    # Virtual Environment
+    [[ -n $VIRTUAL_ENV ]] && PROMPT+="%{$fg[yellow]%}($(basename $VIRTUAL_ENV))%{$reset_color%} "
+
+    # Nix Shell
+    [[ -n $IN_NIX_SHELL ]] && PROMPT+="%{$fg[red]%}(nix)%{$reset_color%} "
+
+    # SSH Session
+    [[ -n $SSH_CONNECTION || -n "$SSH_TTY" || -n "$SSH_CLIENT" ]] && PROMPT="%{$fg[red]%}(ssh)%{$reset_color%} $PS1"
+}
+
+# -----------------------------------
+# File Functions
+# -----------------------------------
+ff() {
+    fdfind --type f --hidden --exclude .git --exclude node_modules --exclude zig-cache | \
+    fzf \
+    --prompt="Find File ▶ " \
+    --color dark \
+    --color fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:#4b5263,hl+:#98c379 \
+    --color info:#98c379,prompt:#61afef,pointer:#e5c07b,marker:#e5c07b,spinner:#61afef,header:#61afef \
+    --preview "bat --color=always --style=plain {1}" \
+    --preview-window "right:60%:wrap" \
+    --bind "enter:execute:(${EDITOR:-nvim} {})"
+}
+
+fcf() {
+    fdfind --type f --hidden --exclude .git --exclude node_modules --exclude zig-cache | \
+    fzf \
+    --prompt="Find File ▶ " \
+    --color dark \
+    --color fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:#4b5263,hl+:#98c379 \
+    --color info:#98c379,prompt:#61afef,pointer:#e5c07b,marker:#e5c07b,spinner:#61afef,header:#61afef \
+    --preview "bat --color=always --style=plain {1}" \
+    --preview-window "right:60%:wrap" \
+    --bind "enter:execute:(nvim --server ./nvim/nvimsocket --remote {})"
+}
+
+fg() {
+    rg --color=always --line-number --no-heading --smart-case "${*:-}" -g '!{**/node_modules/*,**/.git/*,**lock,**/zig-cache/*}' | \
+    fzf \
+    --ansi \
+    --delimiter : \
+    --prompt="Live Grep ▶ " \
+    --preview "bat --color=always --style=plain {1} --highlight-line {2}" \
+    --preview-window "right:60%:wrap" \
+    --bind "enter:execute:(${EDITOR:-nvim} {1} +{2})"
+}
+
+# Keep the default fg functionality
+fgg() {
+    [[ -z $(jobs) ]] && return 1
+    [ $# -gt 0 ] && builtin fg "$@" || builtin fg
+}
+
+# -----------------------------------
+# Git Functions
+# -----------------------------------
+gsync() {
+    if ! git remote | grep -q upstream; then
+        echo -e "\e[31mNo upstream remote found\e[0m"
+        echo -e "\e[36mPlease add upstream remote\e[0m"
+        echo -e "\e[36mExample: git remote add upstream <upstream-repo>\e[0m"
+        return 1
+    fi
+
+    branch=$(git rev-parse --abbrev-ref HEAD)
+    upstream=$(git remote -v | grep upstream | awk '{ print $2 }' | cut -d '/' -f 2 | cut -d '.' -f 1 | head -n 1)
+    commits_behind=$(git rev-list --count HEAD..upstream/$branch)
+
+    echo -e "\e[36mSyncing $branch with $upstream/$branch\e[0m"
+    git pull --no-rebase upstream $branch -q
+
+    if [ $? -ne 0 ]; then
+        echo -e "\e[31mFailed to sync $branch with $upstream/$branch\e[0m"
+        return 1
+    fi
+
+    commits_ahead=$(git rev-list --count HEAD..origin/$branch)
+
+    # Log out the commits that were pulled
+    if [[ $commits_behind -eq 0 ]] && [[ $commits_ahead -eq 0 ]]; then
+        echo -e "\e[32mAlready up to date\e[0m"
+        return 0
+    elif [[ $commits_behind -ne 0 ]]; then
+        echo -e "\e[36mYou were $commits_behind commits behind\e[0m"
+        glo -n "$commits_behind"
+    fi
+
+    echo -e "\e[32mSynced $branch with $upstream/$branch\e[0m"
+
+    if [[ $commits_ahead -eq 0 ]]; then
+        return 0
+    fi
+
+    # Confirmation to push changes to origin
+    echo -e "\e[36mPush changes to origin/$branch? (y/n)\e[0m"
+    read -k 1 -s push
+    if [[ $push != "y" ]]; then
+        echo -e "\e[31mAborting remote sync\e[0m"
+        return 1
+    fi
+
+    echo -e "\e[36mPushing changes to origin/$branch\e[0m"
+    git push origin $branch -q
+
+    echo -e "\e[32mSynced origin/$branch with $upstream/$branch\e[0m"
+}
+
+# -----------------------------------
+# Python Functions
+# -----------------------------------
+pyenv() {
+    [[ -d "$1" ]] && source "$1/bin/activate" && return 0
+
+    echo -e "\033[36mCreating Virtual Environment \"$1\"\033[0m"
+    python3 -m venv $1
+    [[ $? -ne 0 ]] && echo -e "\033[31mFailed to create Virtual Environment\033[0m" && return 1
+
+    echo -e "\033[32mVirtual Environment \"$1\" created\033[0m"
+    echo -e "\033[36mActivating Virtual Environment \"$1\"\033[0m"
+    source "$1/bin/activate"
+    echo -e "\033[32mVirtual Environment \"$1\" created and activated\033[0m"
+}
+
+dpy() {
+    [[ -z $VIRTUAL_ENV ]] && echo -e "\033[31mNo Virtual Environment to deactivate\033[0m" && return 1
+    deactivate && echo -e "\033[32mVirtual Environment deactivated\033[0m"
+}
+
+# -----------------------------------
+# Misc Functions
+# -----------------------------------
+ec() {
+    [[ -z "$1" ]] && echo -e "\033[31mNo file specified\033[0m" && return 1
+    [[ ! -f "$1" ]] && echo -e "\033[31mFile \"$1\" not found\033[0m" && return 1
+
+    case $1 in
+        *.tar.bz2 | *.tbz2) mkdir -p ${1%.*} && tar -xvjf $1 -C ${1%.*} ;;
+        *.tar.gz | *.tgz) mkdir -p ${1%.*} && tar -xvzf $1 -C ${1%.*} ;;
+        *.tar.xz) mkdir -p ${1%.*} && tar -xvJf $1 -C ${1%.*} ;;
+        *.tar) mkdir -p ${1%.*} && tar -xvf $1 -C ${1%.*} ;;
+        *.rar) mkdir -p ${1%.*} && unrar x $1 ${1%.*} ;;
+        *.zip) mkdir -p ${1%.*} && unzip $1 -d ${1%.*} ;;
+        *) echo -e "\033[31mUnsupported file format\033[0m" && return 1 ;;
+    esac
+}
+
+mkcmp() {
+    local usage="Usage: mkcmp <directory> <name> <compression type>"
+
+    [[ $# -lt 3 ]] && echo -e "\033[31mInvalid number of arguments\033[0m\n$usage" && return 1
+
+    [[ -z "$1" || -z "$2" || -z "$3" ]] && echo -e "\033[31mInvalid argument\033[0m\n$usage" && return 1
+    [[ ! -d "$1" ]] && echo -e "\033[31mDirectory \"$1\" not found\033[0m" && return 1
+
+    case $3 in
+        tar.bz2) tar -cjf $2.tar.bz2 $1 ;;
+        tar.gz) tar -czf $2.tar.gz $1 ;;
+        tar.xz) tar -cJf $2.tar.xz $1 ;;
+        tar) tar -cf $2.tar $1 ;;
+        rar) rar a $2.rar $1 ;;
+        zip) zip -r $2.zip $1 ;;
+        *) echo -e "\033[31mUnsupported compression type \"$3\"\033[0m" && return 1 ;;
+    esac
+}
+
+# vim: set filetype=zsh :

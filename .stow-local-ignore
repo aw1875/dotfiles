@@ -1,0 +1,10 @@
+# Git
+\.git
+\.gitignore
+\.gitmodules
+
+# Private
+!private/
+
+# Other files types
+.*\.md

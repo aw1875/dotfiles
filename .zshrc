@@ -1,16 +1,18 @@
-# -----------------------------------
+#-----------------------------------
 # Sources
-# -----------------------------------
-source ~/.dotfiles/zsh/functions
-source ~/.dotfiles/zsh/aliases
+#-----------------------------------
+source ~/.zsh/functions
+source ~/.zsh/aliases
+source ~/.zsh/exports
 
-source ~/.dotfiles/zsh/private/aliases
-source ~/.dotfiles/zsh/private/exports
+source ~/.zsh/private/aliases
+source ~/.zsh/private/exports
 
-# -----------------------------------
-# Setup Prompt & History
-# -----------------------------------
-PromptSetup
+#-----------------------------------
+# Setup ZSH
+#-----------------------------------
+SetupColors
+SetupBindings
 SetupHistory
 
 # -----------------------------------
@@ -19,4 +21,4 @@ SetupHistory
 Plugin "zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 Plugin "zsh-autosuggestions/zsh-autosuggestions.zsh"
 
-# vim: set filetype=zsh :
+PROMPT="%B%{$fg[green]%}[wolfy] ▶ %{$fg[cyan]%}%c%{$reset_color%} "

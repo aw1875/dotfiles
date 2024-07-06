@@ -1,0 +1,16 @@
+# Bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+[ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
+
+# Editor
+export EDITOR=nvim
+export VISUAL=nvim
+
+# bat
+export BAT_THEME="OneHalfDark"
+
+# Nix
+source $HOME/.nix-profile/etc/profile.d/nix.sh
+
+# vim: set filetype=zsh :

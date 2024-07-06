@@ -1,0 +1,63 @@
+# -----------------------------------
+# Custom Aliases
+# -----------------------------------
+alias vim="nvim"
+alias cat="bat -p"
+alias code="code --password-store='gnome'"
+alias nix-shell="nix-shell --command zsh"
+
+alias ls="grc ls --color"
+alias ll="grc ls -lh --color"
+alias lla="grc ls -alh --color"
+
+alias tree="tree -C"
+
+alias cdd="cd ~/dotfiles && clear"
+alias ..="cd .."
+alias ...="cd ../../"
+alias ....="cd ../../../"
+
+alias history="history -E"
+
+alias hd=hide
+alias sd=show
+
+alias :q="exit"
+
+alias ss="~/.dotfiles/zsh/ss"
+alias zr="zig build run"
+
+# -----------------------------------
+# Git Aliases
+# -----------------------------------
+alias gco="git checkout"
+alias gd="git diff"
+alias gdf="git diff HEAD..HEAD~1"
+alias gds="git diff --stat"
+alias gdss="git diff --stat --staged"
+alias gs="git status"
+alias gp="git push origin"
+alias gpu="git pull origin"
+alias ga="git add"
+alias gl="git log"
+alias glo="git log --pretty=format:'%Cred%h %Creset-%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
+alias glog="git log --graph --topo-order --pretty=format:'%Cred%h %Creset-%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
+alias gc="git commit"
+alias gcm="~/.zsh/gcm"
+alias gwa="git worktree add"
+alias gwr="git worktree remove"
+alias gwl="git worktree list"
+
+# -----------------------------------
+# Python Aliases
+# -----------------------------------
+alias python="python3"
+alias pip="pip3"
+
+# -----------------------------------
+# Config Aliases
+# -----------------------------------
+alias zrc='${=EDITOR} ~/.zshrc'
+alias szrc='source ~/.zshrc'
+
+# vim: set filetype=zsh :
