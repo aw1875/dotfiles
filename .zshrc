@@ -20,5 +20,3 @@ SetupHistory
 # -----------------------------------
 Plugin "zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 Plugin "zsh-autosuggestions/zsh-autosuggestions.zsh"
-
-PROMPT="%B%{$fg[green]%}[wolfy] ▶ %{$fg[cyan]%}%c%{$reset_color%} "

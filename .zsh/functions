@@ -50,19 +50,34 @@ SetupHistory() {
 }
 
 # -----------------------------------
-# Prompt precmd
+# Prompt precmd and environment info
 # -----------------------------------
+virtualenv_info() {
+    [[ -n $VIRTUAL_ENV ]] && echo " %{$fg[yellow]%}($(basename $VIRTUAL_ENV))%{$reset_color%}"
+}
+
+nix_shell_info() {
+    [[ -n $IN_NIX_SHELL ]] && echo " %{$fg[blue]%}(nix)%{$reset_color%}"
+}
+
+ssh_info() {
+    [[ -n "$SSH_CONNECTION" || -n "$SSH_TTY" || -n "$SSH_CLIENT" ]] && echo "%{$fg[red]%}(ssh)%{$reset_color%} "
+}
+
 precmd() {
-    # Git
+    PROMPT="$(ssh_info)%B%{$fg[green]%}[wolfy] ▶ %{$fg[cyan]%}%c%{$reset_color%}$(virtualenv_info)$(nix_shell_info) "
+
+    # Git Worktrees
     if [ "$(git rev-parse --is-bare-repository 2>/dev/null)" = "true" ]; then
         WORK_TREES=$(( $(git worktree list | wc -l) - 1 ))
         RPROMPT="%{$bg[yellow]%}%{$fg_bold[black]%}  ${WORK_TREES} %{$reset_color%} "
         return
     fi
     
+    # Git
     vcs_info 
     if [[ -n ${vcs_info_msg_0_} ]]; then
-        STATUS=$(command git status --porcelain 2> /dev/null | tail -n1)
+        STATUS=$(git status --porcelain 2> /dev/null | tail -n1)
         if [[ -n $STATUS ]]; then
     	RPROMPT="%{$bg[red]%}%{$fg_bold[black]%} ${vcs_info_msg_0_}  %{$reset_color%} "
         else
@@ -71,15 +86,6 @@ precmd() {
     else
         RPROMPT=""
     fi
-
-    # Virtual Environment
-    [[ -n $VIRTUAL_ENV ]] && PROMPT+="%{$fg[yellow]%}($(basename $VIRTUAL_ENV))%{$reset_color%} "
-
-    # Nix Shell
-    [[ -n $IN_NIX_SHELL ]] && PROMPT+="%{$fg[red]%}(nix)%{$reset_color%} "
-
-    # SSH Session
-    [[ -n $SSH_CONNECTION || -n "$SSH_TTY" || -n "$SSH_CLIENT" ]] && PROMPT="%{$fg[red]%}(ssh)%{$reset_color%} $PS1"
 }
 
 # -----------------------------------
@@ -184,7 +190,7 @@ gsync() {
 # Python Functions
 # -----------------------------------
 pyenv() {
-    [[ -d "$1" ]] && source "$1/bin/activate" && return 0
+    [[ -d "$1" ]] && source "$1/bin/activate" && echo -e "\033[32mVirtual Environment \"$1\" activated\033[0m" && return 0
 
     echo -e "\033[36mCreating Virtual Environment \"$1\"\033[0m"
     python3 -m venv $1
