@@ -135,6 +135,20 @@ fgg() {
 # -----------------------------------
 # Git Functions
 # -----------------------------------
+gb() {
+    local branch=$(git branch --sort=-committerdate --sort=-HEAD --format=$'%(refname:short)' | fzf --preview 'git show --color=always {1}' --preview-window=right:60%:wrap)
+    [ -z "$branch" ] && return 1
+
+    # If the branch is already checked out we can just return
+    [ "$(git rev-parse --abbrev-ref HEAD)" = "$branch" ] && return 0
+
+    # Handle worktrees if the branch is in a worktree
+    local worktree_location=$(git worktree list | grep "$branch" | awk '{ print $1 }')
+    [ -z "$worktree_location" ] && git checkout $branch > /dev/null 2>&1 && return 0
+    [ -n "$worktree_location" ] && [ "$worktree_location" = "$(pwd)" ] && git checkout $branch && return 0
+    echo -e "Changing cwd to \e[36m$worktree_location\e[0m" && cd "$worktree_location"
+}
+
 gsync() {
     if ! git remote | grep -q upstream; then
         echo -e "\e[31mNo upstream remote found\e[0m"

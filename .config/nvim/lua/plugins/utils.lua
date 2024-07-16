@@ -171,10 +171,45 @@ return {
         ft = { "markdown" },
     },
 
+    -- Which Key
+    {
+        'folke/which-key.nvim',
+        event = "VeryLazy",
+        opts = {
+            delay = 1000,
+            plugins = {
+                marks = true,
+                registers = false,
+                spelling = {
+                    enabled = false,
+                    suggestions = 20,
+                },
+                presets = {
+                    operators = true,
+                    motions = true,
+                    text_objects = true,
+                    windows = true,
+                    nav = true,
+                    z = true,
+                    g = true,
+                },
+            },
+            win = {
+                border = 'shadow',
+                padding = { 2, 2, 2, 2 },
+            },
+            layout = {
+                height = { min = 4, max = 25 },
+                width = { min = 20, max = 50 },
+                spacing = 5,
+                align = 'left',
+            },
+        },
+    },
+
     -- Misc
     'jessarcher/vim-heritage',
     'farmergreg/vim-lastplace',
     'echasnovski/mini.bufremove',
-    'folke/which-key.nvim',
     'mg979/vim-visual-multi',
 }
