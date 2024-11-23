@@ -5,8 +5,10 @@ source ~/.zsh/functions
 source ~/.zsh/aliases
 source ~/.zsh/exports
 
-source ~/.zsh/private/aliases
-source ~/.zsh/private/exports
+if [ -d ~/.zsh/private ]; then
+  source ~/.zsh/private/aliases
+  source ~/.zsh/private/exports
+fi
 
 #-----------------------------------
 # Setup ZSH
