@@ -214,6 +214,55 @@ ls.add_snippets('zig', {
         }, {
             delimiters = "<>"
         })),
+    s({ trig = "aoc", name = "Advent of Code", dscr = "Advent of Code" }, fmt([[
+            const std = @import("std");
+            const common = @import("../../common.zig");
+
+            fn <>(<>) <> {
+                <>
+            }
+
+            pub fn main() !void {
+                var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+                const allocator = gpa.allocator();
+                defer _ = gpa.deinit();
+
+                const input = try common.getInput(allocator, "input.txt", <> * 1024);
+                defer allocator.free(input);
+
+                // std.debug.print("Part 1:{d}\n", .{});"
+                // std.debug.print("Part 2: {d}\n", .{});"
+            }
+
+            pub fn runTests(alloctor: std.mem.Allocator) !void {
+                try testExample1(alloctor);
+                try testExample2(alloctor);
+            }
+
+            fn testExample1(allocator: std.mem.Allocator) !void {
+                const input = try common.getInput(allocator, "demo_1.txt", 64);
+                defer allocator.free(input);
+
+                // try std.testing.expectEqual(<>, FUNCTION);
+            }
+
+            fn testExample2(allocator: std.mem.Allocator) !void {
+                const input = try common.getInput(allocator, "demo_2.txt", 64);
+                defer allocator.free(input);
+
+                // try std.testing.expectEqual(<>, FUNCTION);
+            }
+            ]], {
+        i(4),
+        i(5),
+        i(6),
+        i(0),
+        i(1),
+        i(2),
+        i(3),
+    }, {
+        delimiters = "<>"
+    }))
 })
 
 ls.add_snippets('rust', {

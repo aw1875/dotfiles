@@ -91,7 +91,7 @@ local customSettings = {
             validate = true
         }
     },
-    tsserver = {
+    ts_ls = {
         maxTsServerMemory = 8000,
         implicitProjectConfig = {
             experimentalDecorators = true
@@ -124,7 +124,7 @@ local servers = {
     'html',
     'cssls',
     'lua_ls',
-    'tsserver',
+    'ts_ls',
     -- 'quick_lint_js',
     'bashls',
     'pyright',
