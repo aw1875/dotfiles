@@ -25,7 +25,7 @@ alias sd=show
 alias :q="exit"
 
 alias ss="~/.dotfiles/zsh/ss"
-alias zr="zig build run"
+alias zr="DEBUG=true zig build run"
 
 # -----------------------------------
 # Git Aliases

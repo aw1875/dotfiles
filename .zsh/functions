@@ -77,11 +77,15 @@ precmd() {
     # Git
     vcs_info 
     if [[ -n ${vcs_info_msg_0_} ]]; then
-        STATUS=$(git status --porcelain 2> /dev/null | tail -n1)
-        if [[ -n $STATUS ]]; then
-    	RPROMPT="%{$bg[red]%}%{$fg_bold[black]%} ${vcs_info_msg_0_}  %{$reset_color%} "
+        if [[ -n $(git status --porcelain 2> /dev/null | tail -n1) ]]; then
+            RPROMPT="%{$bg[red]%}%{$fg_bold[black]%} ${vcs_info_msg_0_}  %{$reset_color%} "
         else
-    	RPROMPT="%{$bg[green]%}%{$fg_bold[black]%} ${vcs_info_msg_0_}  %{$reset_color%} "
+            RPROMPT="%{$bg[green]%}%{$fg_bold[black]%} ${vcs_info_msg_0_}  %{$reset_color%} "
+        fi
+
+        # If in a git bisect
+        if [ -f .git/BISECT_LOG ]; then
+            gbisect
         fi
     else
         RPROMPT=""
@@ -136,8 +140,14 @@ fgg() {
 # Git Functions
 # -----------------------------------
 gb() {
-    local branch=$(git branch --sort=-committerdate --sort=-HEAD --format=$'%(refname:short)' | fzf --preview 'git show --color=always {1}' --preview-window=right:60%:wrap)
+    local local_branches=$(git branch --sort=-committerdate --sort=-HEAD --format=$'%(refname:short)')
+    local remote_branches=$(echo "$(git branch -r --sort=-committerdate --sort=-HEAD --format=$'%(refname:short)')" | grep -v -f <(echo "$local_branches" | sed 's/^origin\///'))
+    local branch=$(echo -e "$local_branches\n$remote_branches" | fzf --preview 'git show --color=always {1}' --preview-window=right:60%:wrap)
+
     [ -z "$branch" ] && return 1
+
+    # If the branch is remote (contains origin) check out locally
+    [[ $branch == "origin/"* ]] && git checkout $(echo $branch | sed 's/^origin\///') && return 0
 
     # If the branch is already checked out we can just return
     [ "$(git rev-parse --abbrev-ref HEAD)" = "$branch" ] && return 0
@@ -198,6 +208,24 @@ gsync() {
     git push origin $branch -q
 
     echo -e "\e[32mSynced origin/$branch with $upstream/$branch\e[0m"
+}
+
+gbisect() {
+    RPROMPT="%{$bg[red]%}%{$fg_bold[black]%}  Bisect  %{$reset_color%} "
+
+    # Get the good bad commit hash
+    local bisect_bad=$(git bisect log | grep -oEe 'bad [0-9a-f]{40}' | awk '{ print $2 }' | tail -n 1)
+    local bisect_good=$(git bisect log | grep -oEe 'good [0-9a-f]{40}' | awk '{ print $2 }' | tail -n 1)
+
+    [[ -z $bisect_good && -z $bisect_bad ]] && return 0
+
+    local normal_prompt=$PROMPT
+    PROMPT=""
+
+    [[ -n $bisect_good ]] && PROMPT+="%{$bg[green]%}%{$fg_bold[black]%}$(git rev-parse --short $bisect_good)%{$reset_color%}"$'\n'
+    PROMPT+="$(git rev-parse --short HEAD) %{$fg[yellow]%}"$'\n'
+    [[ -n $bisect_bad ]] && PROMPT+="%{$bg[red]%}%{$fg_bold[black]%}$(git rev-parse --short $bisect_bad)%{$reset_color%}"$'\n'
+    PROMPT+="$normal_prompt"
 }
 
 # -----------------------------------
