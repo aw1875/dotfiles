@@ -88,7 +88,13 @@ local customSettings = {
                 invalidVariant = 'error',
                 recommendedVariantOrder = 'warning'
             },
-            validate = true
+            validate = true,
+            experimental = {
+                classRegex = {
+                    { "cva\\(((?:[^()]|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+                },
+            },
+
         }
     },
     tsserver = {
@@ -105,18 +111,6 @@ local customSettings = {
             },
         },
     },
-    omnisharp = {
-        cmd = { 'dotnet', '/home/adamwolf/.local/share/nvim/mason/packages/omnisharp/libexec/OmniSharp.dll' },
-        enable_editorconfig_support = true,
-        enable_ms_build_load_projects_on_demand = true,
-
-        enable_rosyln_analyzers = true,
-        organize_imports_timeout = false,
-        enable_import_completion = true,
-        sdk_include_previews = true,
-
-        analyze_open_documents_only = false,
-    },
 }
 
 local servers = {
@@ -125,17 +119,7 @@ local servers = {
     'cssls',
     'lua_ls',
     'tsserver',
-    -- 'quick_lint_js',
-    'bashls',
-    'pyright',
-    'gopls',
-    'clangd',
-    'jdtls',
     'jsonls',
-    'rust_analyzer',
-    'omnisharp',
-    'csharp_ls',
-    -- 'zls',
     'rnix',
 
     -- Frameworks
@@ -144,9 +128,6 @@ local servers = {
 
     -- Tools
     'tailwindcss',
-    'prismals',
-    'ansiblels',
-    'dockerls',
 }
 
 -- Setup Mason
@@ -169,36 +150,13 @@ for _, serverName in ipairs(servers) do
     local server = lsp[serverName]
 
     if server then
-        if serverName == 'clangd' then
-            server.setup({
-                on_attach = on_attach,
-                capabilities = capabilities,
-                settings = customSettings[serverName],
-                cmd = { 'clangd', '--query-driver', '/usr/bin/g++' },
-                single_file_support = true,
-            })
-        elseif serverName == 'glint' then
+        if serverName == 'glint' then
             server.setup({
                 on_attach = on_attach,
                 capabilities = capabilities,
                 settings = customSettings[serverName],
                 -- root_dir = utils.is_glint_project,
             })
-        elseif serverName == 'omnisharp' then
-            server.setup({
-                on_attach = function(client)
-                    client.server_capabilities.semanticTokensProvider = nil
-                    on_attach()
-                end,
-                capabilities = capabilities,
-                settings = customSettings[serverName],
-            })
-            -- elseif serverName == 'zls' then
-            --     server.setup({
-            --         cmd = { '/home/adamwolf/.zls/bin/zls' },
-            --         on_attach = on_attach,
-            --         capabilities = capabilities,
-            --     })
         else
             server.setup({
                 on_attach = on_attach,
@@ -209,10 +167,3 @@ for _, serverName in ipairs(servers) do
         end
     end
 end
-
--- ZLS Setup
-lsp["zls"].setup({
-    cmd = { '/home/adamwolf/.zls/bin/zls' },
-    on_attach = on_attach,
-    capabilities = capabilities,
-})
