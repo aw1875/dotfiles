@@ -9,6 +9,10 @@ cd "$SCRIPT_DIR" && git submodule update --init || (echo "Failed to update submo
 
 ln -sf "$SCRIPT_DIR/config.nix" "$XDG_CONFIG_HOME/nixpkgs/"
 
+sudo -i
+
 nix-env -iA nixpkgs.devcontainer
+
+exit
 
 stow . && cd - && echo "Done!"
