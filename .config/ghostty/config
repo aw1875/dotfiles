@@ -1,0 +1,53 @@
+# Color Settings
+background = #282c34
+foreground= #abb2bf
+#selection-background = #282c34
+#selection-foreground = #282c34
+palette = 0=#282c34
+palette = 1=#e06c75
+palette = 2=#98c379
+palette = 3=#d19a66
+palette = 4=#61afef
+palette = 5=#c678dd
+palette = 6=#56b6c2
+palette = 7=#abb2bf
+
+# Font Settings
+font-family = "FiraCode Nerd Font"
+font-size = 10.5
+
+# Cursor Settings
+shell-integration-features = no-cursor
+cursor-style = block
+cursor-click-to-move = true
+
+# Window Settings
+window-padding-x = 10
+window-padding-y = 20
+window-height = 50
+window-width = 200
+
+# window-height = 10000
+# window-width = 10000
+
+title = "Ghostty"
+gtk-titlebar = false
+
+# Misc
+copy-on-select = true
+background-opacity = 0.95
+confirm-close-surface = false
+clipboard-paste-protection = false
+app-notifications=no-clipboard-copy
+
+
+# Testing
+window-position-x = 5
+window-position-y = 50
+# maximize = true
+
+# Keybindings
+keybind = alt+s=new_split:down
+keybind = alt+v=new_split:right
+keybind = alt+f=toggle_maximize
+# keybind = all:alt+t=toggle_background_opacity

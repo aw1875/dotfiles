@@ -82,7 +82,7 @@ require('lualine').setup({
             {
                 function() return icons.kinds.Copilot .. 'Copilot' end,
                 cond = function()
-                    local ok, clients = pcall(vim.lsp.get_active_clients, { name = 'copilot', bufnr = 0 })
+                    local ok, clients = pcall(vim.lsp.get_clients, { name = 'copilot', bufnr = 0 })
                     return ok and #clients > 0
                 end,
                 color = function()

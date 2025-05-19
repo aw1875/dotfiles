@@ -3,9 +3,11 @@ return {
     {
         'navarasu/onedark.nvim',
         priority = 1000,
-        config = function()
-            vim.cmd.colorscheme 'onedark'
-        end,
+        opts = {
+            style = 'dark',
+            transparent = true,
+            term_colors = true,
+        },
     },
 
     -- Buffer Line

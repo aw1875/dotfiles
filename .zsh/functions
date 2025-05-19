@@ -286,4 +286,57 @@ mkcmp() {
     esac
 }
 
+# Helpful for ghostty dev work
+colormap() {
+    SAVED_PROMPT="$PROMPT"
+    SAVED_RPROMPT="$RPROMPT"
+
+    unset PS1
+    unset RPROMPT
+    clear
+
+    local i bg fg reset
+    reset=$'\E[00m'
+
+    local current_row=()
+
+    for i in {0..255}; do
+        current_row+=($i)
+
+        if (( i % 16 == 15 )); then
+            for r in {0..1}; do
+                for j in ${current_row[@]}; do
+                    fg=$'\E[38;5;'$((255 - j % 8))'m'
+                    bg=$'\E[48;5;'$j'm'
+                    printf '%s           %s ' $bg $reset
+                done
+                echo
+            done
+
+            for j in ${current_row[@]}; do
+                fg=$'\E[38;5;'$((255 - j % 8))'m'
+                bg=$'\E[48;5;'$j'm'
+                printf '%s    %s%03d    %s ' $bg $fg $j $reset
+            done
+            echo
+
+            for r in {0..1}; do
+                for j in ${current_row[@]}; do
+                    fg=$'\E[38;5;'$((255 - j % 8))'m'
+                    bg=$'\E[48;5;'$j'm'
+                    printf '%s           %s ' $bg $reset
+                done
+                echo
+            done
+
+            current_row=()
+        fi
+    done
+
+    echo $reset
+
+    export PS1="$SAVED_PROMPT"
+    export RPROMPT="$SAVED_RPROMPT"
+}
+
 # vim: set filetype=zsh :

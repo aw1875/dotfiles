@@ -88,7 +88,12 @@ local customSettings = {
                 invalidVariant = 'error',
                 recommendedVariantOrder = 'warning'
             },
-            validate = true
+            validate = true,
+            experimental = {
+                classRegex = {
+                    { "cva\\(((?:[^()]|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+                }
+            }
         }
     },
     ts_ls = {
@@ -133,14 +138,17 @@ local servers = {
     'jdtls',
     'jsonls',
     'rust_analyzer',
-    'omnisharp',
-    'csharp_ls',
+    -- 'omnisharp',
+    -- 'csharp_ls',
     -- 'zls',
     'rnix',
+    -- 'asm_lsp',
+    'autotools_ls',
 
     -- Frameworks
     'ember',
     'glint',
+    'sqlls',
 
     -- Tools
     'tailwindcss',
@@ -212,7 +220,23 @@ end
 
 -- ZLS Setup
 lsp["zls"].setup({
-    cmd = { '/home/adamwolf/.zls/bin/zls' },
+    -- cmd = { '/home/adamwolf/.zls/zls-bin/zls' },
+    -- cmd = { '/home/adamwolf/.zls/zigscient-bin/zigscient' },
+    cmd = { '/nix/store/14sr583safhjqgmqr1125lsrnqfpnz9n-zls-0.13.0/bin/zls' }, -- Point to nix version
+    on_attach = on_attach,
+    capabilities = capabilities,
+})
+
+-- ASM Setup
+lsp["asm_lsp"].setup({
+    cmd = { '/home/adamwolf/.local/share/nvim/mason/bin/asm-lsp' },
+    on_attach = on_attach,
+    capabilities = capabilities,
+    root_dir = lsp.util.root_pattern('.git'),
+})
+
+-- Swift Setup
+lsp['sourcekit'].setup({
     on_attach = on_attach,
     capabilities = capabilities,
 })

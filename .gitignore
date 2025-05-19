@@ -3,7 +3,7 @@ private
 expressvpn
 express-vpn.sh
 
-after
+.config/nvim/after
 *.luarc.json
 *.dev.lua
 dev.lua

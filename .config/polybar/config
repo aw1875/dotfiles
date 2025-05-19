@@ -50,7 +50,7 @@ font-4 = feather:size=10;3
 
 modules-left = round-left bspwm round-right round-left github round-right round-left disks round-right round-left memory round-right
 modules-center = round-left name round-right
-modules-right = round-left pulseaudio round-right round-left wired-network round-right round-left openvpn round-right round-left shockvpn round-right round-left date round-right round-left powermenu round-right 
+modules-right = round-left pulseaudio round-right round-left wired-network round-right round-left openvpn round-right round-left expressvpn round-right round-left date round-right round-left powermenu round-right 
 
 wm-restack = bspwm
 
@@ -92,14 +92,14 @@ cursor-scroll = ns-resize
 type = internal/bspwm
 pin-workspaces = true
 
-inline-mode = false
-label-focused = ""
-label-occupied = ""
-label-empty = ""
+inline-mode = true
+label-focused = "  "
+label-occupied = "  "
+label-empty = "  "
 
-label-focused-padding = 1px
-label-occupied-padding = 1px
-label-empty-padding = 1px
+label-focused-padding = 0px
+label-occupied-padding = 0px
+label-empty-padding = 0px
 label-focused-background = ${colors.background}  
 label-occupied-background = ${colors.background}  
 label-empty-background = ${colors.background}  
@@ -139,6 +139,15 @@ format-font = 4
 type = custom/script
 exec = ~/.config/polybar/scripts/shockvpn.sh
 click-left = ~/.config/polybar/scripts/shockvpn.sh --toggle &
+interval = 1.0
+format-foreground = ${colors.primary}
+format-background = ${colors.background}
+format-font = 4
+
+[module/expressvpn]
+type = custom/script
+exec = ~/.config/polybar/scripts/express-vpn.sh
+click-left = ~/.config/polybar/scripts/express-vpn.sh --toggle &
 interval = 1.0
 format-foreground = ${colors.primary}
 format-background = ${colors.background}
