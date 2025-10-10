@@ -1,9 +1,3 @@
-local ok, lsp = pcall(require, 'lspconfig')
-if not ok then
-    require('notify')('LSP failed to load', 'error')
-    return
-end
-
 -- LSP Config
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
@@ -15,8 +9,8 @@ local on_attach = function()
     map('n', 'gT', vim.lsp.buf.type_definition, { buffer = 0 })
     map('n', 'gi', vim.lsp.buf.implementation, { buffer = 0 })
     map('n', 'gr', '<cmd>TroubleToggle lsp_references<cr>', { buffer = 0 })
-    map('n', '<leader>dn', vim.diagnostic.goto_next, { buffer = 0 })
-    map('n', '<leader>dp', vim.diagnostic.goto_prev, { buffer = 0 })
+    map('n', '<leader>dn', function() vim.diagnostic.jump({ count = 1 }) end, { buffer = 0 })
+    map('n', '<leader>dp', function() vim.diagnostic.jump({ count = -1 }) end, { buffer = 0 })
     map('n', '<leader>rn', vim.lsp.buf.rename, { buffer = 0 })
     map('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = 0 })
 end
@@ -29,16 +23,24 @@ local signs = {
     Info = ' ',
 }
 
-for type, icon in pairs(signs) do
-    local hl = 'DiagnosticSign' .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
 vim.opt.spelllang = { 'en_us' }
 
 vim.diagnostic.config({
-    virtual_text = false,
-    signs = true,
+    virtual_lines = true,
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = signs.Error,
+            [vim.diagnostic.severity.WARN] = signs.Warn,
+            [vim.diagnostic.severity.INFO] = signs.Info,
+            [vim.diagnostic.severity.HINT] = signs.Hint,
+        },
+        numhl = {
+            [vim.diagnostic.severity.ERROR] = 'DiagnosticsSignError',
+            [vim.diagnostic.severity.WARN] = 'DiagnosticsSignWarn',
+            [vim.diagnostic.severity.INFO] = 'DiagnosticsSignInfo',
+            [vim.diagnostic.severity.HINT] = 'DiagnosticsSignHint',
+        },
+    },
     underline = true,
     update_in_insert = false,
     severity_sort = true,
@@ -55,7 +57,8 @@ local customSettings = {
     lua_ls = {
         Lua = {
             diagnostics = {
-                globals = { 'vim', 'P' }
+                globals = { 'vim', 'P' },
+                disable = { 'missing-fields' }
             }
         },
         workspace = {
@@ -110,18 +113,6 @@ local customSettings = {
             },
         },
     },
-    omnisharp = {
-        cmd = { 'dotnet', '/home/adamwolf/.local/share/nvim/mason/packages/omnisharp/libexec/OmniSharp.dll' },
-        enable_editorconfig_support = true,
-        enable_ms_build_load_projects_on_demand = true,
-
-        enable_rosyln_analyzers = true,
-        organize_imports_timeout = false,
-        enable_import_completion = true,
-        sdk_include_previews = true,
-
-        analyze_open_documents_only = false,
-    },
 }
 
 local servers = {
@@ -130,30 +121,19 @@ local servers = {
     'cssls',
     'lua_ls',
     'ts_ls',
-    -- 'quick_lint_js',
     'bashls',
     'pyright',
-    'gopls',
-    'clangd',
-    'jdtls',
+    -- 'gopls',
+    -- 'clangd',
     'jsonls',
-    'rust_analyzer',
-    -- 'omnisharp',
-    -- 'csharp_ls',
-    -- 'zls',
-    'rnix',
-    -- 'asm_lsp',
-    'autotools_ls',
+    -- 'rust_analyzer',
 
     -- Frameworks
-    'ember',
-    'glint',
     'sqlls',
 
     -- Tools
     'tailwindcss',
     'prismals',
-    'ansiblels',
     'dockerls',
 }
 
@@ -174,69 +154,46 @@ require('mason-lspconfig').setup({
 
 -- Setup LSP
 for _, serverName in ipairs(servers) do
-    local server = lsp[serverName]
+    -- if serverName == 'clangd' then
+    --     server.setup({
+    --         on_attach = on_attach,
+    --         capabilities = capabilities,
+    --         settings = customSettings[serverName],
+    --         cmd = { 'clangd', '--query-driver', '/usr/bin/g++' },
+    --         single_file_support = true,
+    --     })
 
-    if server then
-        if serverName == 'clangd' then
-            server.setup({
-                on_attach = on_attach,
-                capabilities = capabilities,
-                settings = customSettings[serverName],
-                cmd = { 'clangd', '--query-driver', '/usr/bin/g++' },
-                single_file_support = true,
-            })
-        elseif serverName == 'glint' then
-            server.setup({
-                on_attach = on_attach,
-                capabilities = capabilities,
-                settings = customSettings[serverName],
-                -- root_dir = utils.is_glint_project,
-            })
-        elseif serverName == 'omnisharp' then
-            server.setup({
-                on_attach = function(client)
-                    client.server_capabilities.semanticTokensProvider = nil
-                    on_attach()
-                end,
-                capabilities = capabilities,
-                settings = customSettings[serverName],
-            })
-            -- elseif serverName == 'zls' then
-            --     server.setup({
-            --         cmd = { '/home/adamwolf/.zls/bin/zls' },
-            --         on_attach = on_attach,
-            --         capabilities = capabilities,
-            --     })
-        else
-            server.setup({
-                on_attach = on_attach,
-                capabilities = capabilities,
-                settings = customSettings[serverName],
-                single_file_support = true,
-            })
-        end
+    if serverName == 'ts_ls' then
+        vim.lsp.config(serverName, {
+            on_attach = function()
+                on_attach()
+
+                if vim.lsp.inlay_hint then
+                    vim.lsp.inlay_hint.enable(true)
+                end
+            end,
+            capabilities = capabilities,
+            settings = customSettings.ts_ls,
+            single_file_support = true,
+            init_options = {
+                preferences = {
+                    includeInlayParameterNameHints = 'all',
+                    includeInlayParamaterNameHintsWhenArgumentMatchesName = true,
+                    includeInlayFunctionParameterTypeHints = true,
+                    includeInlayVariableTypeHints = true,
+                    includeInlayPropertyDeclarationTypeHints = true,
+                    includeInlayFunctionLikeReturnTypeHints = true,
+                    includeInlayEnumMemberValueHints = true,
+                    importModuleSpecifierPreference = 'relative',
+                }
+            },
+        })
+    else
+        vim.lsp.config(serverName, {
+            on_attach = on_attach,
+            capabilities = capabilities,
+            settings = customSettings[serverName],
+            single_file_support = true,
+        })
     end
 end
-
--- ZLS Setup
-lsp["zls"].setup({
-    -- cmd = { '/home/adamwolf/.zls/zls-bin/zls' },
-    -- cmd = { '/home/adamwolf/.zls/zigscient-bin/zigscient' },
-    cmd = { '/nix/store/14sr583safhjqgmqr1125lsrnqfpnz9n-zls-0.13.0/bin/zls' }, -- Point to nix version
-    on_attach = on_attach,
-    capabilities = capabilities,
-})
-
--- ASM Setup
-lsp["asm_lsp"].setup({
-    cmd = { '/home/adamwolf/.local/share/nvim/mason/bin/asm-lsp' },
-    on_attach = on_attach,
-    capabilities = capabilities,
-    root_dir = lsp.util.root_pattern('.git'),
-})
-
--- Swift Setup
-lsp['sourcekit'].setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-})

@@ -8,3 +8,6 @@
 
 # Other files types
 .*\.md
+
+# Mac DS files
+\.DS_Store

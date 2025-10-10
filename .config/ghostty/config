@@ -1,8 +1,6 @@
 # Color Settings
 background = #282c34
 foreground= #abb2bf
-#selection-background = #282c34
-#selection-foreground = #282c34
 palette = 0=#282c34
 palette = 1=#e06c75
 palette = 2=#98c379
@@ -14,7 +12,9 @@ palette = 7=#abb2bf
 
 # Font Settings
 font-family = "FiraCode Nerd Font"
-font-size = 10.5
+font-synthetic-style= false
+font-size = 13.5
+font-thicken = true
 
 # Cursor Settings
 shell-integration-features = no-cursor
@@ -26,28 +26,17 @@ window-padding-x = 10
 window-padding-y = 20
 window-height = 50
 window-width = 200
-
-# window-height = 10000
-# window-width = 10000
-
 title = "Ghostty"
-gtk-titlebar = false
 
 # Misc
 copy-on-select = true
-background-opacity = 0.95
+background-opacity = 0.9
+background-blur-radius = 20
 confirm-close-surface = false
-clipboard-paste-protection = false
-app-notifications=no-clipboard-copy
-
-
-# Testing
-window-position-x = 5
-window-position-y = 50
-# maximize = true
+initial-command = /bin/zsh -l -c "tmux attach || tmux new-session -As Main"
+confirm-close-surface = false
 
 # Keybindings
 keybind = alt+s=new_split:down
 keybind = alt+v=new_split:right
 keybind = alt+f=toggle_maximize
-# keybind = all:alt+t=toggle_background_opacity

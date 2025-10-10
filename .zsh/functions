@@ -139,6 +139,22 @@ fgg() {
 # -----------------------------------
 # Git Functions
 # -----------------------------------
+gwa() {
+    git worktree add "../$1"
+
+    echo -n "$fg[blue]Would you like to copy .env files?:$reset_color "
+    read -rk 1 COPY
+    echo
+
+    if [[ $COPY =~ ^[Yy] ]]; then
+        echo -n "$fg[blue]Copying .env files...$reset_color "
+        find . -type f -name ".env" -exec cp --parents {} ../$1 \;
+        echo "$fg[green]Done!$reset_color"
+    fi
+
+    cd "../$1"
+}
+
 gb() {
     local local_branches=$(git branch --sort=-committerdate --sort=-HEAD --format=$'%(refname:short)')
     local remote_branches=$(echo "$(git branch -r --sort=-committerdate --sort=-HEAD --format=$'%(refname:short)')" | grep -v -f <(echo "$local_branches" | sed 's/^origin\///'))

@@ -4,6 +4,9 @@ expressvpn
 express-vpn.sh
 
 .config/nvim/after
+.config/github-copilot
 *.luarc.json
 *.dev.lua
 dev.lua
+
+.DS_Store
